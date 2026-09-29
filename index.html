@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ألوان للطباعة والتصميم - أرسل ملفاتك للطباعة، تصفح خدماتنا: طباعة ورقية، حرارية، ليزر، تصميم، تصوير، هدايا وأكثر. الخنق - الأغواط">
+<meta name="theme-color" content="#7f1d2d">
+<title>ألوان للطباعة والتصميم | أرسل ملفك الآن</title>
+<link rel="icon" href="alwan.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============ المتغيرات والألوان (هوية ألوان) ============ */
+:root{
+  --bg:#f6f7f9;
+  --card:#ffffff;
+  --ink:#1f2937;
+  --muted:#6b7280;
+  --maroon:#7f1d2d;   /* خمري */
+  --red:#c1121f;      /* أحمر */
+  --orange:#ea580c;   /* برتقالي */
+  --blue:#1d4ed8;     /* أزرق (بدرجة محدودة) */
+  --grad:linear-gradient(135deg,#7f1d2d 0%,#b91c1c 55%,#ea580c 115%);
+  --border:#e9eaee;
+  --shadow:0 4px 24px rgba(31,41,55,.08);
+  --radius:18px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Cairo',sans-serif;background:var(--bg);color:var(--ink);
+  line-height:1.7;padding-bottom:92px; /* مساحة للشريط السفلي */
+}
+img{max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,select,textarea{font-family:inherit}
+section{scroll-margin-top:80px}
+.container{max-width:1100px;margin:0 auto;padding:0 16px}
+::selection{background:var(--orange);color:#fff}
+
+/* ============ الهيدر ============ */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.93);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.topbar-inner{display:flex;align-items:center;gap:12px;padding:10px 16px;max-width:1100px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand>img{width:46px;height:46px;object-fit:contain;border-radius:12px;background:#fff;border:1px solid var(--border);padding:3px;flex-shrink:0}
+.brand-name{display:block;font-weight:800;font-size:16.5px;line-height:1.3;white-space:nowrap}
+.brand-tag{display:block;font-size:11px;color:var(--muted);letter-spacing:1px}
+.top-links{display:none;gap:20px;margin-inline-start:auto}
+.top-links a{font-size:14px;font-weight:700;color:var(--muted);transition:.2s}
+.top-links a:hover{color:var(--maroon)}
+.call-chip{
+  display:none;align-items:center;gap:8px;margin-inline-start:auto;
+  background:#fff;border:1.5px solid var(--border);border-radius:999px;
+  padding:7px 14px;font-weight:800;font-size:14px;color:var(--maroon);transition:.25s;
+}
+.call-chip svg{width:16px;height:16px;fill:currentColor}
+.call-chip:hover{border-color:var(--maroon);transform:translateY(-1px)}
+@media(min-width:640px){.call-chip{display:inline-flex;margin-inline-start:0}}
+@media(min-width:900px){.top-links{display:flex}.call-chip{margin-inline-start:auto}}
+@media(max-width:380px){.brand-tag{display:none}}
+
+/* شريط أيقونات التواصل أسفل الهيدر مباشرة */
+.social-strip{
+  display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:10px 12px;background:#fff;border-bottom:1px solid var(--border);
+}
+.s-ico{
+  width:36px;height:36px;border-radius:11px;display:grid;place-items:center;
+  color:#fff;transition:.25s;box-shadow:0 3px 8px rgba(0,0,0,.12);
+}
+.s-ico svg{width:17px;height:17px;fill:currentColor}
+.s-ico:hover{transform:translateY(-3px) scale(1.05)}
+
+/* ============ Hero (الصورة الإعلانية) ============ */
+.hero{max-width:1100px;margin:16px auto 0;padding:0 12px}
+.hero-img{
+  width:100%;height:auto;display:block;object-fit:contain;
+  border-radius:20px;box-shadow:var(--shadow);background:#fff;
+}
+.hero-fallback{
+  position:relative;isolation:isolate;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  width:100%;max-width:100%;box-sizing:border-box;padding:20px 26px;
+  border:1px solid rgba(255,255,255,.1);border-radius:18px;
+  background:linear-gradient(115deg,#0d1019 0%,#171326 56%,#101a22 100%);
+  box-shadow:0 14px 34px rgba(13,16,25,.18),inset 0 1px rgba(255,255,255,.08);
+  color:#fff;direction:rtl;text-align:right;overflow:hidden;
+}
+.hero-fallback::before{
+  content:"";position:absolute;z-index:-1;inset:0 0 auto;height:2px;
+  background:linear-gradient(90deg,transparent 4%,#32d8ee 32%,#ff4d8d 72%,transparent 96%);
+  opacity:.85;
+}
+.hero-fallback .neon-logo{
+  display:block;order:2;flex:0 0 auto;width:150px;height:82px;padding:9px 11px;
+  object-fit:contain;border:1px solid rgba(255,255,255,.14);border-radius:14px;
+  background:rgba(255,255,255,.055);
+  filter:
+    drop-shadow(0 0 4px rgba(255,0,100,.8))
+    drop-shadow(0 0 9px rgba(0,200,255,.5));
+  animation:neonPulse 2.5s ease-in-out infinite alternate;
+}
+.hero-fallback > div{
+  display:flex;order:1;flex:1;min-width:0;flex-direction:column;align-items:flex-start;
+  justify-content:center;gap:7px;
+}
+.hero-fallback strong{font-size:20px;font-weight:800;line-height:1.4;color:#fff}
+.hero-fallback span{font-size:13px;line-height:1.7;color:#c4c5d2}
+.hero-fallback b{
+  display:inline-flex;align-items:center;gap:8px;margin-top:2px;padding:7px 12px;
+  border:1px solid rgba(255,255,255,.14);border-radius:999px;
+  background:rgba(255,255,255,.07);color:#ffd36b;font-size:13px;font-weight:800;
+}
+.hero-fallback b::before{content:"☎";color:#62dff0;font-size:14px}
+@keyframes neonPulse{
+  from{
+    filter:
+      drop-shadow(0 0 3px rgba(255,0,100,.5))
+      drop-shadow(0 0 5px rgba(0,200,255,.3));
+  }
+  to{
+    filter:
+      drop-shadow(0 0 7px rgba(255,0,100,.9))
+      drop-shadow(0 0 12px rgba(0,200,255,.7));
+  }
+}
+@media(max-width:480px){
+  .hero-fallback{justify-content:flex-start;gap:12px;padding:14px;border-radius:15px}
+  .hero-fallback .neon-logo{width:84px;height:58px;padding:6px;border-radius:11px}
+  .hero-fallback > div{gap:5px}
+  .hero-fallback strong{font-size:16px}
+  .hero-fallback span{font-size:11px;line-height:1.55}
+  .hero-fallback b{padding:6px 10px;font-size:12px}
+}
+
+.neon-logo{
+  filter:
+    drop-shadow(0 0 4px rgba(255,0,100,.8))
+    drop-shadow(0 0 9px rgba(0,200,255,.5));
+  animation:neonPulse 2.5s ease-in-out infinite alternate;
+}
+.brand>img.neon-logo{
+  background:transparent;
+  border:0;
+  border-radius:0;
+  padding:0;
+}
+@media(prefers-reduced-motion:reduce){
+  .neon-logo,.hero-fallback .neon-logo{animation:none}
+}
+
+/* ============ الأزرار ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 26px;border-radius:14px;font-weight:800;font-size:15.5px;
+  transition:.25s;border:2px solid transparent;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 8px 22px rgba(193,18,31,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(193,18,31,.38)}
+.btn-wa{background:#25D366;color:#fff;box-shadow:0 8px 22px rgba(37,211,102,.25)}
+.btn-wa:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.btn-outline{background:#fff;border-color:var(--border);color:var(--ink)}
+.btn-outline:hover{border-color:var(--maroon);color:var(--maroon)}
+.btn-block{width:100%}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+/* ============ عناوين الأقسام ============ */
+.sec-head{text-align:center;margin:40px 0 22px}
+.sec-head h2{font-size:clamp(21px,4.5vw,28px);font-weight:800}
+.sec-head p{color:var(--muted);font-size:14px;margin-top:4px}
+.sec-head .line{width:56px;height:4px;border-radius:4px;background:var(--grad);margin:12px auto 0}
+
+/* ============ قسم أرسل ملفك الآن ============ */
+.cta{margin-top:26px}
+.cta-card{
+  background:linear-gradient(135deg,#ffffff 0%,#fff4ec 100%);
+  border:1px solid var(--border);border-radius:24px;padding:32px 20px;
+  box-shadow:var(--shadow);text-align:center;
+}
+.cta-card .cta-logo{display:block;width:min(72vw,280px);height:auto;margin:0 auto 14px}
+.cta-card h2{font-size:clamp(23px,5.5vw,32px);font-weight:800}
+.cta-card>p{color:var(--muted);font-size:15px;margin-top:6px}
+.cta-btns{
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  max-width:560px;margin:22px auto 0;
+}
+.cta-btns .send-ico{
+  width:72px;height:72px;border-radius:18px;display:grid;place-items:center;
+  color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.12);transition:.25s;flex-shrink:0;
+}
+.cta-btns .send-ico svg{width:30px;height:30px;fill:currentColor}
+.cta-btns .tiktok-ico svg{filter:drop-shadow(2px 0 #25f4ee) drop-shadow(-2px 0 #fe2c55)}
+.cta-btns .send-ico:hover{transform:translateY(-3px) scale(1.04)}
+@media(max-width:520px){
+  .cta-btns{gap:10px;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}
+  .cta-btns .send-ico{width:62px;height:62px;min-width:62px;border-radius:16px}
+  .cta-btns .send-ico svg{width:26px;height:26px}
+}
+
+/* ============ الخدمات ============ */
+.search-box{position:relative;max-width:520px;margin:0 auto 14px}
+.search-box input{
+  width:100%;padding:12px 44px 12px 16px;border:1.5px solid var(--border);border-radius:14px;
+  font-size:15px;background:#fff;outline:none;transition:.2s;box-shadow:var(--shadow);
+}
+.search-box input:focus{border-color:var(--maroon)}
+.search-box svg{position:absolute;top:50%;right:14px;transform:translateY(-50%);width:18px;height:18px;fill:#9ca3af}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  white-space:nowrap;padding:8px 18px;border-radius:999px;background:#fff;
+  border:1.5px solid var(--border);font-size:13.5px;font-weight:700;color:var(--muted);transition:.25s;flex-shrink:0;
+}
+.chip:hover{border-color:var(--orange);color:var(--orange)}
+.chip.active{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(193,18,31,.25)}
+.services-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:640px){.services-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.services-grid{grid-template-columns:repeat(3,1fr)}}
+.service-card{
+  background:#fff;border:1px solid var(--border);border-radius:20px;padding:0;overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:var(--shadow);transition:.3s;
+}
+.service-card:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(31,41,55,.13)}
+.service-thumb{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;display:block;background:#f8fafc}
+.service-thumb-full,.product-page-image-full{object-position:center;background:#f8fafc}
+.service-body{padding:14px 16px 15px}
+.sc-icon{
+  width:38px;height:38px;flex:0 0 38px;border-radius:12px;display:grid;place-items:center;
+  font-size:20px;line-height:1;box-shadow:0 6px 12px rgba(31,41,55,.08);
+}
+.service-title{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.service-card h3{font-size:16px;font-weight:800;margin:0}
+.service-card ul{list-style:none;flex:1;margin-bottom:14px}
+.service-card li{font-size:13.5px;color:var(--muted);padding:2.5px 0;display:flex;gap:7px}
+.service-card li::before{content:'•';color:var(--orange);font-weight:800}
+.sc-badges{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.sc-badge{
+  display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;
+  font-size:11px;font-weight:700;background:rgba(127,29,45,.06);color:var(--maroon);
+}
+.sc-btn{
+  width:100%;padding:10px;border-radius:12px;font-weight:800;font-size:14px;
+  color:#fff;background:var(--sc,#7f1d2d);transition:.25s;
+}
+.sc-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.product-page{max-width:900px;margin:0 auto 30px;background:#fff;border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.product-page[hidden]{display:none}
+.product-page-head{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--border)}
+.product-back{width:42px;height:42px;flex:0 0 42px;border:1px solid var(--border);border-radius:12px;background:#fff;color:var(--ink);font-size:22px}
+.product-page-head h2{font-size:19px;font-weight:800}
+.product-page-head p{font-size:13px;color:var(--muted)}
+.product-page-content{display:grid;grid-template-columns:1fr;gap:20px;padding:18px}
+.product-page-image{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:14px;background:#f8fafc}
+.product-page-items h3{font-size:16px;margin-bottom:10px}
+.product-list{display:grid;grid-template-columns:1fr;gap:8px;list-style:none}
+.product-list li{padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:#fbfcfd;font-size:14px}
+.product-list li::before{content:'✓';color:var(--orange);font-weight:800;margin-inline-end:8px}
+@media(min-width:640px){.product-page-content{grid-template-columns:1fr 1fr;align-items:start}}
+.empty{grid-column:1/-1;text-align:center;padding:36px 16px;color:var(--muted);font-size:15px}
+
+/* ============ خطوات العمل ============ */
+.steps{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.step{
+  background:#fff;border:1px solid var(--border);border-radius:18px;
+  padding:18px 14px;text-align:center;box-shadow:var(--shadow);transition:.3s;
+}
+.step:hover{transform:translateY(-3px)}
+.step-num{
+  width:40px;height:40px;margin:0 auto 10px;border-radius:50%;background:var(--grad);
+  color:#fff;font-weight:800;display:grid;place-items:center;box-shadow:0 6px 14px rgba(193,18,31,.25);
+}
+.step h4{font-size:15px;font-weight:800}
+.step p{font-size:12.5px;color:var(--muted);margin-top:2px}
+
+/* ============ QR ============ */
+.qr-card{
+  display:flex;flex-direction:column;align-items:center;gap:20px;background:#fff;
+  border:1px solid var(--border);border-radius:22px;padding:28px 20px;box-shadow:var(--shadow);
+  max-width:760px;margin:0 auto;
+}
+@media(min-width:720px){.qr-card{flex-direction:row;justify-content:center}}
+.qr-img{border:1px solid var(--border);border-radius:18px;padding:10px;background:#fff;box-shadow:var(--shadow);flex-shrink:0}
+.qr-img img{display:block;border-radius:10px}
+.qr-info{text-align:center}
+@media(min-width:720px){.qr-info{text-align:right}}
+.qr-info h3{font-size:19px;font-weight:800;margin-bottom:6px}
+.qr-info p{color:var(--muted);font-size:14px}
+.qr-phone{display:inline-block;font-size:26px;font-weight:800;color:var(--maroon);margin:10px 0 12px}
+.qr-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+@media(min-width:720px){.qr-actions{justify-content:flex-start}}
+.qr-actions .btn{padding:10px 20px;font-size:14px}
+
+/* ============ التواصل ============ */
+.contact-wrap{display:grid;gap:14px;max-width:900px;margin:0 auto}
+@media(min-width:860px){.contact-wrap{grid-template-columns:1fr 1.2fr}}
+.info-card,.soc-card{
+  background:#fff;border:1px solid var(--border);border-radius:20px;
+  padding:22px;box-shadow:var(--shadow);
+}
+.info-card h3,.soc-card h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.info-row{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px dashed var(--border)}
+.info-row:last-child{border:0}
+.info-ico{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;flex-shrink:0;font-size:19px}
+.info-row strong{display:block;font-size:14.5px}
+.info-row span{font-size:13.5px;color:var(--muted)}
+.info-row a{color:var(--maroon);font-weight:800;font-size:14px}
+.soc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+@media(min-width:520px){.soc-grid{grid-template-columns:repeat(3,1fr)}}
+.soc-btn{
+  display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:14px;
+  background:#fafbfc;border:1.5px solid var(--border);font-weight:700;font-size:13.5px;transition:.25s;
+}
+.soc-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:transparent}
+.soc-btn .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;flex-shrink:0}
+.soc-btn .ic svg{width:16px;height:16px;fill:currentColor}
+
+/* ============ الفوتر ============ */
+footer{
+  background:#fff;border-top:1px solid var(--border);margin-top:46px;
+  padding:24px 16px calc(24px);text-align:center;color:var(--muted);font-size:13px;
+}
+footer .f-logo{font-weight:800;color:var(--maroon);font-size:15px}
+
+/* ============ الشريط السفلي (موبايل) ============ */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:60;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-around;align-items:flex-end;
+  padding:7px 6px calc(7px + env(safe-area-inset-bottom));
+}
+.bn-item{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-size:10.5px;font-weight:700;color:var(--muted);min-width:56px;padding:4px 6px;
+  border-radius:12px;transition:.2s;
+}
+.bn-item svg{width:21px;height:21px;fill:currentColor}
+.bn-item.active,.bn-item:hover{color:var(--maroon)}
+.bn-send{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  background:var(--grad);color:#fff;border-radius:16px;padding:9px 18px;
+  margin-top:-26px;box-shadow:0 10px 22px rgba(193,18,31,.4);
+  font-size:11.5px;font-weight:800;min-width:76px;transition:.2s;
+}
+.bn-send svg{width:20px;height:20px;fill:#fff}
+.bn-send:hover{transform:translateY(-2px)}
+@media(min-width:768px){.bottom-nav{display:none}body{padding-bottom:0}}
+
+/* ============ التوست ============ */
+.toast-wrap{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:999;
+  display:flex;flex-direction:column;gap:8px;width:min(92vw,430px);pointer-events:none;
+}
+.toast{
+  background:#111827;color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;
+  font-weight:700;display:flex;gap:10px;align-items:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);opacity:0;transform:translateY(-14px);transition:.35s;
+}
+.toast.show{opacity:1;transform:none}
+.toast .t-ico{
+  width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.2);
+  display:grid;place-items:center;font-size:12px;flex-shrink:0;
+}
+.toast.success{background:#065f46}
+.toast.error{background:#b91c1c}
+.toast.info{background:#1e3a8a}
+
+/* ============ أنيميشن الظهور ============ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ===== مكتبة الأيقونات SVG ===== -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol>
+  <symbol id="i-viber" viewBox="0 0 24 24"><path d="M11.398.002C9.473.028 5.331.344 3.014 2.467 1.294 4.182.696 6.654.628 9.739c-.068 3.085-.153 8.864 5.431 10.438h.005l-.004 2.396s-.037.969.603 1.167c.762.237 1.202-.49 1.925-1.275.396-.43.945-1.062 1.358-1.544 3.743.327 6.622-.404 6.953-.513.756-.248 5.032-.792 5.732-6.457.718-5.813-.348-9.496-2.285-11.174l-.001-.001c-.6-.549-3.061-2.118-8.542-2.174zm.126 1.944c4.659.029 7.017 1.201 7.535 1.636 1.635 1.417 2.441 4.599 1.832 9.425v.003c-.583 4.71-3.906 5.054-4.548 5.268-.274.089-2.782.716-6.026.511 0 0-2.37 2.87-3.11 3.611-.118.118-.255.163-.345.146-.129-.024-.166-.176-.165-.388l.02-3.912c-4.676-1.319-4.402-6.096-4.347-8.593.055-2.498.534-4.543 1.979-5.983 1.864-1.726 5.263-2.053 7.155-2.724zm.192 2.254c-.102-.002-.176.085-.183.19-.007.105.069.194.174.201 1.455.108 2.633.64 3.536 1.597.897.952 1.391 2.177 1.449 3.7.004.105.093.186.198.182.105-.003.185-.093.182-.198-.063-1.646-.602-2.986-1.603-4.045-.995-1.053-2.299-1.642-3.883-1.758-.093-.006-.164.019-.17.131zm-2.23 1.025c-.622-.015-1.342.11-2.139.608-.014.009-.025.021-.032.035-.721.903-.973 1.781-.987 2.708-.003.18.015.36.053.536l.015.048c.162.649.518 1.279 1.047 1.903l.004.004c.856.998 1.898 1.79 3.077 2.338.642.295 1.375.463 2.148.481h.029c.527 0 .99-.149 1.364-.443.356-.281.586-.673.671-1.141l.005-.027c.061-.317-.016-.633-.215-.873l-.787-.938c-.201-.24-.496-.366-.795-.351-.293.014-.564.152-.743.383l-.374.482c-.334-.183-.636-.412-.905-.686-.301-.307-.546-.654-.735-1.041l.471-.39c.232-.192.362-.469.363-.763.001-.299-.128-.587-.353-.783l-.913-.797c-.215-.187-.483-.283-.75-.289l-.021.001zm2.384 1.163c-.104-.006-.181.074-.186.178-.004.104.07.194.174.199.895.045 1.597.344 2.123.885.52.535.803 1.239.828 2.173.003.105.089.188.194.185.105-.003.187-.09.184-.195-.028-1.053-.362-1.872-.968-2.493-.6-.614-1.418-.964-2.429-1.025-.067-.004-.124.007-.12.093zm.188 1.198c-.103-.006-.176.074-.182.178-.006.105.067.195.172.2.434.027.772.172 1.028.426.251.251.395.588.426 1.03.003.105.093.186.198.183.104-.004.184-.094.18-.198-.038-.543-.225-.981-.553-1.306-.324-.321-.758-.507-1.295-.541-.066-.004-.122.007-.126.128z"/></symbol>
+  <symbol id="i-gmail" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></symbol>
+  <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.21v13.67a2.89 2.89 0 1 1-2.89-2.89c.3 0 .59.05.86.14V9.64a6.12 6.12 0 1 0 5.24 6.03V8.74a8.02 8.02 0 0 0 4.69 1.51V7.04c-.33 0-.64-.12-.92-.35z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></symbol>
+</svg>
+
+<!-- التوست -->
+<div id="toasts" class="toast-wrap"></div>
+
+<!-- ===== الهيدر: الشعار ===== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#home" class="brand" data-scroll="#home">
+      <img class="neon-logo" src="alwan.png" alt="شعار ألوان للطباعة والتصميم" onerror="this.style.display='none'">
+      <span>
+        <strong class="brand-name">ألوان للطباعة والتصميم</strong>
+        <small class="brand-tag">COLORS • طباعة • تصميم • إبداع</small>
+      </span>
+    </a>
+    <nav class="top-links">
+      <a href="#services" data-scroll="#services">الخدمات</a>
+      <a href="#how" data-scroll="#how">كيف نعمل</a>
+      <a href="#contact" data-scroll="#contact">تواصل معنا</a>
+    </nav>
+    <a class="call-chip" href="tel:+213655728658">
+      <svg><use href="#i-phone"/></svg><span dir="ltr">06.55.72.86.58</span>
+    </a>
+  </div>
+</header>
+
+<!-- ===== الصورة الإعلانية الرئيسية ===== -->
+<section class="hero" id="home">
+  <!-- ضع صورتك الإعلانية باسم hero.jpg بجانب هذا الملف -->
+  <img class="hero-img" src="hero.jpg" alt="ألوان للطباعة والتصميم — الخدمات والعروض" decoding="async"
+       onerror="this.style.display='none';document.getElementById('heroFallback').style.display='flex'">
+  <div class="hero-fallback" id="heroFallback" style="display:flex">
+    <img class="neon-logo" src="alwan.png" alt="شعار ألوان" onerror="this.style.display='none'">
+    <div>
+      <strong>ألوان للطباعة والتصميم</strong>
+      <span>طباعة • تصميم • تصوير • ليزر • هدايا • مطبوعات</span>
+      <b dir="ltr">06.55.72.86.58</b>
+    </div>
+  </div>
+</section>
+
+<!-- ===== أرسل ملفك الآن ===== -->
+<section class="cta container">
+  <div class="cta-card reveal">
+    <img class="neon-logo cta-logo" src="alwan.png" alt="شعار ألوان" loading="eager">
+    <h2>📤 أرسل ملفك الآن</h2>
+    <p>أرسل ملفك للطباعة أو التصميم مباشرة من هاتفك</p>
+    <div class="cta-btns">
+      <a class="send-ico" style="background:#25D366" href="https://wa.me/213655728658" target="_blank" rel="noopener" aria-label="واتساب" title="واتساب"><svg><use href="#i-wa"/></svg></a>
+      <a class="send-ico" style="background:#1877F2" href="https://facebook.com" target="_blank" rel="noopener" aria-label="فيسبوك" title="فيسبوك"><svg><use href="#i-fb"/></svg></a>
+      <a class="send-ico" style="background:#E1306C" href="https://www.instagram.com/aboudjouri1992/?hl=ar" target="_blank" rel="noopener" aria-label="انستغرام" title="انستغرام"><svg><use href="#i-ig"/></svg></a>
+      <a class="send-ico" style="background:#0088cc" href="https://t.me/AoRRFIL" target="_blank" rel="noopener" aria-label="تيليجرام" title="تيليجرام"><svg><use href="#i-tg"/></svg></a>
+      <a class="send-ico" style="background:#7360f2" href="viber://chat?number=213655728658" aria-label="فايبر" title="فايبر"><svg><use href="#i-viber"/></svg></a>
+      <a class="send-ico tiktok-ico" style="background:#111" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="تيك توك" title="تيك توك"><svg><use href="#i-tiktok"/></svg></a>
+      <a class="send-ico" style="background:#EA4335" href="mailto:toufikbellahcen@gmail.com" aria-label="البريد الإلكتروني" title="البريد الإلكتروني"><svg><use href="#i-gmail"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== خدماتنا ===== -->
+<section id="services" class="container">
+  <div class="sec-head reveal">
+    <h2>🛍️ منتجات المحل</h2>
+    <p>تعرّف على المنتجات والخدمات المتوفرة لدى ألوان</p>
+    <div class="line"></div>
+  </div>
+
+  <div class="search-box reveal">
+    <svg><use href="#i-search"/></svg>
+    <input type="text" id="searchInput" placeholder="🔎 ابحث عن خدمة...">
+  </div>
+
+  <div class="chips reveal" id="chips"></div>
+  <div class="services-grid" id="servicesGrid"></div>
+  <article class="product-page" id="productPage" hidden aria-live="polite"></article>
+</section>
+
+<!-- ===== كيف تطلب خدمتك ===== -->
+<section id="how" class="container">
+  <div class="sec-head reveal">
+    <h2>⚡ كيف تطلب خدمتك؟</h2>
+    <p>5 خطوات فقط ويصلك طلبك</p>
+    <div class="line"></div>
+  </div>
+  <div class="steps">
+    <div class="step reveal"><div class="step-num">1</div><h4>اختر الخدمة</h4><p>من قائمة خدماتنا</p></div>
+    <div class="step reveal"><div class="step-num">2</div><h4>ارفع الملف</h4><p>PDF، صور، Word...</p></div>
+    <div class="step reveal"><div class="step-num">3</div><h4>أرسل الطلب</h4><p>عبر النموذج أو واتساب</p></div>
+    <div class="step reveal"><div class="step-num">4</div><h4>نتواصل معك</h4><p>لتأكيد التفاصيل والسعر</p></div>
+    <div class="step reveal"><div class="step-num">5</div><h4>تستلم طلبك</h4><p>بجودة عالية وفي الوقت</p></div>
+  </div>
+</section>
+
+<!-- ===== QR Code ===== -->
+<section id="qr" class="container">
+  <div class="sec-head reveal">
+    <h2>📱 أرسل ملفك بسرعة</h2>
+    <div class="line"></div>
+  </div>
+  <div class="qr-card reveal">
+    <div class="qr-img">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&data=https%3A%2F%2Fwa.me%2F213655728658"
+           alt="QR Code — واتساب ألوان للطباعة" width="190" height="190" loading="lazy"
+           onerror="this.style.display='none';document.getElementById('qrAlt').style.display='inline-flex'">
+    </div>
+    <div class="qr-info">
+      <h3>امسح QR Code لفتح واتساب</h3>
+      <p>وجّه كاميرا هاتفك نحو الرمز وأرسل ملفك مباشرة</p>
+      <a class="qr-phone" href="tel:+213655728658" dir="ltr">06.55.72.86.58</a>
+      <div class="qr-actions">
+        <button class="btn btn-outline" onclick="copyPhone()">📋 نسخ الرقم</button>
+        <a id="qrAlt" class="btn btn-wa" style="display:none"
+           href="https://wa.me/213655728658" target="_blank" rel="noopener">💬 فتح واتساب</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== التواصل ومعلومات المحل ===== -->
+<section id="contact" class="container">
+  <div class="sec-head reveal">
+    <h2>📞 تواصل معنا</h2>
+    <p>نحن في خدمتك في أي وقت</p>
+    <div class="line"></div>
+  </div>
+
+  <div class="contact-wrap">
+    <div class="info-card reveal">
+      <h3>📍 معلومات المحل</h3>
+      <div class="info-row">
+        <div class="info-ico" style="background:rgba(127,29,45,.1)">📍</div>
+        <div>
+          <strong>العنوان</strong>
+          <span>بلدية الخنق — ولاية الأغواط، الجزائر</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-ico" style="background:rgba(234,88,12,.1)">📞</div>
+        <div>
+          <strong>الهاتف</strong>
+          <span><a href="tel:+213655728658" dir="ltr">06.55.72.86.58</a></span>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-ico" style="background:rgba(37,211,102,.12)">💬</div>
+        <div>
+          <strong>واتساب لإرسال الملفات</strong>
+          <span><a href="https://wa.me/213655728658" target="_blank" rel="noopener">افتح المحادثة الآن</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="soc-card reveal">
+      <h3>🌐 تابعنا على منصاتنا</h3>
+      <div class="soc-grid">
+        <a class="soc-btn" href="https://wa.me/213655728658" target="_blank" rel="noopener"><span class="ic" style="background:#25D366"><svg><use href="#i-wa"/></svg></span>واتساب</a>
+        <a class="soc-btn" href="https://facebook.com" target="_blank" rel="noopener"><span class="ic" style="background:#1877F2"><svg><use href="#i-fb"/></svg></span>فيسبوك</a>
+        <a class="soc-btn" href="https://www.instagram.com/aboudjouri1992/?hl=ar" target="_blank" rel="noopener"><span class="ic" style="background:#E1306C"><svg><use href="#i-ig"/></svg></span>انستغرام</a>
+        <a class="soc-btn" href="https://t.me/AoRRFIL" target="_blank" rel="noopener"><span class="ic" style="background:#0088cc"><svg><use href="#i-tg"/></svg></span>تيليجرام</a>
+        <a class="soc-btn" href="viber://chat?number=213655728658"><span class="ic" style="background:#7360f2"><svg><use href="#i-viber"/></svg></span>فايبر</a>
+        <a class="soc-btn" href="mailto:toufikbellahcen@gmail.com"><span class="ic" style="background:#EA4335"><svg><use href="#i-gmail"/></svg></span>جيميل</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== الفوتر ===== -->
+<footer>
+  <div class="f-logo">ألوان للطباعة والتصميم</div>
+  &copy; 2026 جميع الحقوق محفوظة — الخنق، الأغواط 🇩🇿
+</footer>
+
+<!-- ===== الشريط السفلي ===== -->
+<nav class="bottom-nav" aria-label="تنقل سريع">
+  <a href="#home" class="bn-item active" data-scroll="#home"><svg><use href="#i-home"/></svg>الرئيسية</a>
+  <a href="#services" class="bn-item" data-scroll="#services"><svg><use href="#i-grid"/></svg>الخدمات</a>
+  <a href="https://wa.me/213655728658?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D8%A7%D8%B1%D8%BA%D8%AF%20%D8%A7%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D9%84%D8%B7%D8%A8%D8%A7%D8%B9%D8%A9" target="_blank" rel="noopener" class="bn-send"><svg><use href="#i-send"/></svg>إرسال ملف</a>
+  <a href="https://wa.me/213655728658" target="_blank" rel="noopener" class="bn-item"><svg><use href="#i-wa"/></svg>واتساب</a>
+  <a href="tel:+213655728658" class="bn-item"><svg><use href="#i-phone"/></svg>اتصال</a>
+</nav>
+
+<script>
+/* ================================================================
+   الإعدادات — عدّل من هنا فقط
+================================================================ */
+const CONFIG = {
+  whatsapp: '213655728658',
+  email: 'toufikbellahcen@gmail.com',
+  facebook: 'https://facebook.com',
+  instagram: 'https://www.instagram.com/aboudjouri1992/?hl=ar',
+  telegram: 'https://t.me/AoRRFIL',
+  // ربط مستقبلي مع Backend (Google Apps Script / Supabase / Cloudinary ...)
+  // عندما تصبح جاهزاً: backend.enabled = true  و  submitUrl = رابط الـ Web App
+  backend: { enabled: false, submitUrl: '' }
+};
+
+/* ================================================================
+   بيانات الخدمات
+================================================================ */
+const SERVICES = [
+  {id:'print',    icon:'🖨️', title:'الطباعة الورقية',            cat:'print',   color:'#7f1d2d', cta:'أرسل ملف للطباعة', desc:['أبيض وأسود • ملون','A4 • A3','وثائق • بحوث • ملفات'], image:'https://res.cloudinary.com/dq38km9rc/image/upload/v1790695962/ChatGPT_Image_Sep_29_2026_04_29_51_PM_gjpppj.png'},
+  {id:'heat',     icon:'👕', title:'الطباعة الحرارية',           cat:'print',   color:'#ea580c', cta:'أرسل تصميمك',      desc:['قمصان • أكواب • قبعات','أقمشة • إكسسوارات'], image:'https://res.cloudinary.com/dq38km9rc/image/upload/v1790697993/ChatGPT_Image_Sep_29_2026_05_02_10_PM_cxn8pr.png'},
+  {id:'design',   icon:'🎨', title:'التصميم الجرافيكي',          cat:'design',  color:'#c1121f', cta:'اطلب التصميم',     desc:['شعارات • بطاقات • إعلانات','منشورات • مطبوعات','تصاميم السوشيال ميديا'], image:'https://res.cloudinary.com/dq38km9rc/image/upload/v1790699326/ChatGPT_Image_Sep_29_2026_05_24_52_PM_owuy9f.png'},
+  {id:'photo',    icon:'📷', title:'التصوير الفوتوغرافي',        cat:'photo',   color:'#1d4ed8', cta:'اطلب التصوير',     desc:['صور شمسية • صور رسمية','صور الوثائق','تصوير المناسبات'], image:'https://res.cloudinary.com/dq38km9rc/image/upload/v1790700230/ChatGPT_Image_Sep_29_2026_05_31_29_PM_cdax8k.png'},
+  {id:'laser',    icon:'🔥', title:'خدمات الليزر',               cat:'laser',   color:'#b45309', cta:'أرسل التصميم',     desc:['حفر • قص • نقش','خشب • أكريليك'], image:'https://res.cloudinary.com/dq38km9rc/image/upload/v1790700707/ChatGPT_Image_Sep_29_2026_05_47_12_PM_ph9k6f.png'},
+  {id:'gifts',    icon:'🏆', title:'الهدايا والجوائز',           cat:'gifts',   color:'#b91c1c', cta:'اطلب الخدمة',      desc:['دروع • كؤوس • ميداليات','شهادات تقدير','هدايا مخصصة'], image:'https://res.cloudinary.com/dq38km9rc/image/upload/v1790701317/ChatGPT_Image_Sep_29_2026_06_01_22_PM_vtnmfs.png'},
+  {id:'events',   icon:'🎁', title:'توزيعات الأفراح والمناسبات', cat:'events',  color:'#9f1239', cta:'أرسل الطلب',       desc:['بطاقات الدعوة • توزيعات','علب هدايا • مطبوعات','استيكرات المناسبات'], image:'https://res.cloudinary.com/dq38km9rc/image/upload/v1790702401/ChatGPT_Image_Sep_29_2026_06_19_07_PM_d6j40p.png'},
+  {id:'stickers', icon:'🏷️', title:'الملصقات والاستيكرات',       cat:'print',   color:'#ea580c', cta:'أرسل التصميم',     desc:['ملصقات المنتجات','Labels • Stickers','لاصقات • ملصقات مقصوصة'], image:'https://res.cloudinary.com/dq38km9rc/image/upload/v1790702624/ChatGPT_Image_Sep_29_2026_06_22_55_PM_vkrcgd.png'},
+  {id:'digital',  icon:'💻', title:'الخدمات الرقمية',            cat:'digital', color:'#1d4ed8', cta:'اطلب الخدمة',      desc:['مسح ضوئي • نسخ الوثائق','تحويل PDF • Word • Excel','طباعة من الهاتف'], image:'https://res.cloudinary.com/dq38km9rc/image/upload/v1790703769/ChatGPT_Image_Sep_29_2026_06_42_11_PM_dxv9yx.png'},
+  {id:'school',   icon:'📚', title:'مكتبي ومدرسي',               cat:'school',  color:'#7f1d2d', cta:'استفسر',           desc:['كراريس • أدوات مدرسية','أدوات مكتبية • محافظ','مستلزمات الدراسة'], image:'https://res.cloudinary.com/dq38km9rc/image/upload/v1790704181/ChatGPT_Image_Sep_29_2026_06_49_08_PM_oiqgy7.png'},
+];
+const CATS = [
+  {id:'all',label:'الكل'},{id:'print',label:'الطباعة'},{id:'design',label:'التصميم'},
+  {id:'photo',label:'التصوير'},{id:'laser',label:'الليزر'},{id:'events',label:'المناسبات'},
+  {id:'gifts',label:'الهدايا'},{id:'digital',label:'الخدمات الرقمية'},{id:'school',label:'المكتبي والمدرسي'},
+];
+/* ================================================================
+   أدوات مساعدة
+================================================================ */
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hex2rgba = (h,a) => { const n = parseInt(h.slice(1),16); return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`; };
+function fmtSize(b){ if(b<1024) return b+' B'; if(b<1048576) return (b/1024).toFixed(1)+' KB'; return (b/1048576).toFixed(1)+' MB'; }
+
+function toast(type,msg){
+  const wrap = $('toasts');
+  if(wrap.children.length > 3) wrap.firstChild.remove();
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  const ico = type==='success' ? '✓' : type==='error' ? '✕' : 'ℹ';
+  t.innerHTML = `<span class="t-ico">${ico}</span><span>${esc(msg)}</span>`;
+  wrap.appendChild(t);
+  requestAnimationFrame(()=>t.classList.add('show'));
+  setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(),380); }, 3400);
+}
+
+/* أنيميشن الظهور */
+const io = ('IntersectionObserver' in window)
+  ? new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }), {threshold:.1})
+  : null;
+function watchReveals(root=document){
+  if(io){ root.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el)); }
+  else { document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in')); }
+}
+
+/* ================================================================
+   الخدمات: تصنيفات + بحث + عرض
+================================================================ */
+let activeCat = 'all', query = '';
+
+function showProducts(id, updateHistory=true){
+  const service = SERVICES.find(item=>item.id===id);
+  if(!service) return;
+  $('servicesGrid').hidden = true;
+  $('productPage').hidden = false;
+  $('productPage').innerHTML = `
+    <header class="product-page-head" style="--sc:${service.color}">
+      <button class="product-back" type="button" onclick="closeProducts()" aria-label="العودة إلى المنتجات">→</button>
+      <div><h2>${service.icon} ${service.title}</h2><p>المنتجات المتوفرة في هذا القسم</p></div>
+    </header>
+    <div class="product-page-content">
+      <img class="product-page-image${service.id==='print'?' product-page-image-full':''}" src="${service.image}" alt="${service.title}" loading="lazy">
+      <div class="product-page-items">
+        <h3>محتويات القسم</h3>
+        <ul class="product-list">${service.desc.flatMap(line=>line.split('•')).map(item=>item.trim()).filter(Boolean).map(item=>`<li>${item}</li>`).join('')}</ul>
+      </div>
+    </div>`;
+  if(updateHistory) history.pushState({productId:id}, '', `#products/${id}`);
+  $('productPage').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function closeProducts(updateHistory=true){
+  $('productPage').hidden = true;
+  $('servicesGrid').hidden = false;
+  if(updateHistory){
+    if(location.hash.startsWith('#products/')) history.replaceState({}, '', '#services');
+    $('services').scrollIntoView({behavior:'smooth'});
+  }
+}
+
+window.showProducts = showProducts;
+window.closeProducts = closeProducts;
+
+function renderChips(){
+  const wrap = $('chips');
+  CATS.forEach(c=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + (c.id==='all' ? ' active' : '');
+    b.textContent = c.label;
+    b.onclick = ()=>{
+      activeCat = c.id;
+      wrap.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      renderServices();
+    };
+    wrap.appendChild(b);
+  });
+}
+
+function renderServices(){
+  const q = query.trim().toLowerCase();
+  const list = SERVICES.filter(s=>{
+    const matchCat = activeCat==='all' || s.cat===activeCat;
+    const text = (s.title + ' ' + s.desc.join(' ')).toLowerCase();
+    return matchCat && (!q || text.includes(q));
+  });
+  $('servicesGrid').innerHTML = list.length ? list.map(s=>`
+    <article class="service-card reveal" style="--sc:${s.color}">
+      <img class="service-thumb${s.id==='print'?' service-thumb-full':''}" src="${s.image}" alt="${s.title}" loading="lazy">
+      <div class="service-body">
+        <div class="service-title">
+          <div class="sc-icon" style="background:${hex2rgba(s.color,.12)}">${s.icon}</div>
+          <h3>${s.title}</h3>
+        </div>
+        <ul>${s.desc.slice(0,2).map(d=>`<li>${d}</li>`).join('')}</ul>
+        <button class="sc-btn" onclick="showProducts('${s.id}')">عرض المنتجات ←</button>
+      </div>
+    </article>`).join('')
+    : `<div class="empty">😕 لا توجد خدمة مطابقة — جرّب كلمة أخرى</div>`;
+  watchReveals($('servicesGrid'));
+}
+ $('searchInput').addEventListener('input', e=>{ query = e.target.value; renderServices(); });
+window.addEventListener('popstate',()=>{
+  const productId = location.hash.startsWith('#products/') ? location.hash.slice('#products/'.length) : '';
+  if(productId) showProducts(productId,false);
+  else closeProducts(false);
+});
+
+/* ================================================================
+   تنقل سلس + نسخ الرقم
+================================================================ */
+document.querySelectorAll('[data-scroll]').forEach(el=>{
+  el.addEventListener('click', e=>{
+    e.preventDefault();
+    const t = document.querySelector(el.dataset.scroll);
+    if(t) t.scrollIntoView({behavior:'smooth'});
+    if(el.classList.contains('bn-item')){
+      document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
+      el.classList.add('active');
+    }
+  });
+});
+function copyPhone(){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText('0655728658')
+      .then(()=>toast('success','تم نسخ الرقم ✓'))
+      .catch(()=>toast('error','تعذر النسخ'));
+  }else toast('error','تعذر النسخ');
+}
+window.copyPhone = copyPhone;
+
+/* ================================================================
+   التهيئة
+================================================================ */
+renderChips();
+renderServices();
+watchReveals();
+if(location.hash.startsWith('#products/')) showProducts(location.hash.slice('#products/'.length),false);
+</script>
+</body>
+</html>
