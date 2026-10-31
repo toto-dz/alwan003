@@ -111,25 +111,15 @@ header {
 .logo-symbol {
   width: 44px;
   height: 44px;
+  object-fit: contain;
+  padding: 2px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--primary-800) 0%, var(--primary-600) 100%);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--primary-100);
   box-shadow: 0 4px 14px rgba(29, 78, 140, 0.35);
-  font-weight: 800;
-  font-size: 22px;
-  position: relative;
-  overflow: hidden;
 }
 
-.logo-symbol::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 50%;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent);
-}
+.logo-symbol::after { content: none; }
 
 .brand-text h1 {
   margin: 0;
@@ -1353,7 +1343,7 @@ html[dir="ltr"] .people-grid{text-align:left}
 <header>
   <div class="top-bar">
     <div class="brand-badge">
-      <div class="logo-symbol">غ</div>
+      <img class="logo-symbol" src="alwan.png" alt="شعار ألوان">
       <div class="brand-text">
         <h1 class="">واجهة البحث <span class="badge">النسخة المجانية 100%.</span></h1>
       </div>
