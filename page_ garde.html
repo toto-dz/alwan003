@@ -2218,8 +2218,7 @@ function saveCanvasAsA4Pdf(canvas, filename){
 async function triggerPdfDownload() {
   updateLivePreview();
   if(typeof html2canvas === 'undefined') {
-    showToast('تعذر تحميل أداة PDF؛ سيتم فتح نافذة الطباعة.');
-    window.print();
+    showToast('تعذر تحميل أداة إنشاء PDF. تحقق من اتصال الإنترنت ثم أعد المحاولة.');
     return;
   }
   showToast('جارٍ تجهيز ملف PDF للتنزيل...');
@@ -2257,8 +2256,8 @@ async function triggerPdfDownload() {
     saveCanvasAsA4Pdf(a4Canvas,`غلاف-${safeName}.pdf`);
     showToast('تم تنزيل ملف PDF بنجاح.');
   } catch(error) {
-    showToast('تعذر إنشاء PDF؛ سيتم فتح نافذة الطباعة.');
-    window.print();
+    console.error('PDF generation failed:', error);
+    showToast('تعذر إنشاء ملف PDF. أعد المحاولة بعد لحظات.');
   }
 }
 
