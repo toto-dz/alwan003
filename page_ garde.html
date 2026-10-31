@@ -2011,7 +2011,8 @@ function showToast(msg) {
 }
 
 function updateLivePreview() {
-  previewTargets.university.textContent = fields.university.value.trim() || tr('اسم الجامعة');
+  const universityName = fields.university.value.trim();
+  previewTargets.university.textContent = universityName ? tr(universityName) : tr('اسم الجامعة');
   previewTargets.faculty.textContent = fields.faculty.value.trim();
   previewTargets.department.textContent = fields.department.value.trim();
   previewTargets.field.textContent = fields.field.value.trim();
