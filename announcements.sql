@@ -10,6 +10,8 @@ create table if not exists public.announcements (
   summary text not null check (char_length(summary) between 1 and 360),
   content text not null check (char_length(content) between 1 and 12000),
   image text not null default '',
+  link_url text not null default '',
+  link_label text not null default 'افتح الصفحة',
   badge text,
   badge_type text check (badge_type is null or badge_type in ('new','important')),
   published boolean not null default false,
@@ -19,6 +21,10 @@ create table if not exists public.announcements (
 
 alter table public.announcements
   add column if not exists image text not null default '';
+
+alter table public.announcements
+  add column if not exists link_url text not null default '',
+  add column if not exists link_label text not null default 'افتح الصفحة';
 
 alter table public.announcements enable row level security;
 grant select, insert, update, delete on public.announcements to anon, authenticated;

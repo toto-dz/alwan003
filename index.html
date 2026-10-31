@@ -223,6 +223,8 @@ section{scroll-margin-top:80px}
 .news-card h3{font-size:17px;line-height:1.6;color:var(--ink);margin:8px 0}
 .news-summary{color:var(--muted);font-size:13.5px;line-height:1.9;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .news-card-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:18px}
+.news-link-button{display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;margin-top:14px;padding:9px 14px;border-radius:11px;background:var(--grad);color:#fff;font-size:13px;font-weight:800;box-shadow:0 5px 14px rgba(127,29,45,.18);transition:transform .2s}
+.news-link-button:hover{transform:translateY(-2px)}
 .news-details-button{padding:8px 13px;border-radius:11px;background:var(--grad);color:#fff;font:800 12.5px 'Cairo',sans-serif}
 .news-empty{grid-column:1/-1;padding:32px 18px;text-align:center;border:1px dashed rgba(127,29,45,.24);border-radius:18px;background:linear-gradient(135deg,#fff,#fff8f1);color:var(--muted);font-size:14px}
 .news-dialog{position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-50%);margin:0;width:min(92vw,620px);max-height:min(84vh,720px);overflow:auto;padding:0;border:0;border-radius:22px;background:#fff;color:var(--ink);box-shadow:0 24px 80px rgba(15,23,42,.3)}
@@ -689,7 +691,7 @@ const CONFIG = {
 const announcementsDb=window.supabase.createClient('https://fifhljmytaukftkxdyxa.supabase.co','sb_publishable_t4mhVcP55DRH3hhcl4ruyg_LxoCiQYx');
 
 /* مصدر المستجدات: يمكن لاحقًا استبدال هذه المصفوفة باستجابة API من لوحة الإدارة أو Supabase/Sheets.
-   الحقول: id, title, date (YYYY-MM-DD), category, summary, content, badge, badgeType. */
+   الحقول: id, title, date (YYYY-MM-DD), category, summary, content, badge, badgeType, link_url, link_label. */
 const NEWS_CATEGORIES = [
   {id:'all',label:'الكل'},
   {id:'shop',label:'أخبار المحل'},
@@ -903,6 +905,7 @@ function renderNews(){
       </div>
       <h3>${esc(item.title)}</h3>
       <p class="news-summary">${esc(item.summary)}</p>
+      ${safeNewsLink(item.link_url)?`<a class="news-link-button" href="${esc(safeNewsLink(item.link_url))}" target="_blank" rel="noopener noreferrer">${esc(item.link_label||'افتح الصفحة')}</a>`:''}
       <div class="news-card-footer">
         <time class="news-date" datetime="${esc(item.date)}">📅 ${esc(formatNewsDate(item.date))}</time>
         <button class="news-details-button" type="button" data-news-id="${esc(item.id)}">اقرأ التفاصيل</button>
@@ -910,6 +913,12 @@ function renderNews(){
     </article>`;
   }).join('');
   watchReveals(grid);
+}
+
+function safeNewsLink(value){
+  if(!value)return '';
+  try{const url=new URL(value,location.href);return url.protocol==='https:'||url.protocol==='http:'?url.href:'';}
+  catch{return '';}
 }
 
 function safeNewsImage(value){
@@ -937,7 +946,7 @@ async function loadPublishedNews(){
   try{
     const {data,error}=await announcementsDb.from('announcements').select('id,title,date,category,summary,content,image,badge,badge_type').eq('published',true).order('date',{ascending:false}).order('created_at',{ascending:false});
     if(error)throw error;
-    ANNOUNCEMENTS=(data||[]).map(item=>({id:item.id,title:item.title,date:item.date,category:item.category,summary:item.summary,content:item.content,image:item.image,badge:item.badge,badgeType:item.badge_type}));
+    ANNOUNCEMENTS=(data||[]).map(item=>({id:item.id,title:item.title,date:item.date,category:item.category,summary:item.summary,content:item.content,image:item.image,badge:item.badge,badgeType:item.badge_type,link_url:item.link_url,link_label:item.link_label}));
   }catch(error){console.warn('تعذر تحميل مستجدات قاعدة البيانات، ستبقى المستجدات المضمنة ظاهرة:',error);}
   renderNews();
 }
