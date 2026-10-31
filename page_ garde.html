@@ -1,0 +1,2407 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>واجهة البحث | المنصة الاحترافية لتصميم أغلفة المذكرات الأكاديمية</title>
+<!-- Google Fonts for elevated Arabic Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&amp;family=Cairo:wght@400;500;600;700;800;900&amp;family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+:root {
+  --primary-900: #0c1e38;
+  --primary-800: #122b4f;
+  --primary-700: #173b6b;
+  --primary-600: #1d4e8c;
+  --primary-500: #2563eb;
+  --primary-100: #e0edff;
+  --primary-50: #f0f6ff;
+
+  --emerald-700: #047857;
+  --emerald-600: #059669;
+  --emerald-50: #ecfdf5;
+
+  --amber-700: #b45309;
+  --amber-600: #d97706;
+  --amber-500: #c29543;
+  --amber-100: #fef3c7;
+
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --slate-50: #f8fafc;
+  --white: #ffffff;
+
+  --danger-500: #ef4444;
+  --danger-50: #fef2f2;
+  --danger-border: #fecaca;
+
+  --font-ui: 'Cairo', 'Tajawal', system-ui, -apple-system, sans-serif;
+  --font-academic: 'Amiri', 'Traditional Arabic', serif;
+
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.07), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 12px 30px -4px rgba(18, 43, 79, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  --shadow-sheet: 0 25px 60px -15px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(15, 23, 42, 0.06);
+
+  --radius-xl: 18px;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7fb;
+  color: var(--slate-800);
+  font-family: var(--font-ui);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Atmosphere */
+body {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.07) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(194, 149, 67, 0.06) 0px, transparent 40%),
+    radial-gradient(at 50% 100%, rgba(203, 213, 225, 0.2) 0px, transparent 50%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Navigation Header */
+header {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--slate-200);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-bar {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-symbol {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary-800) 0%, var(--primary-600) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(29, 78, 140, 0.35);
+  font-weight: 800;
+  font-size: 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-symbol::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent);
+}
+
+.brand-text h1 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--primary-900);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-text h1 span.badge {
+  font-size: 11px;
+  background: var(--primary-100);
+  color: var(--primary-700);
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 700;
+}
+
+.brand-text p {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  color: var(--slate-500);
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.language-select{min-width:118px;cursor:pointer}
+.mobile-nav{display:none}
+
+/* Quick Stats Bar in Hero */
+.app-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 28px 60px;
+}
+
+.hero-banner {
+  background: linear-gradient(135deg, #0e2444 0%, #163866 50%, #1c4b85 100%);
+  border-radius: var(--radius-xl);
+  padding: 28px 36px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(194, 149, 67, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  right: 5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-titles h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.hero-titles p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14.5px;
+  max-width: 680px;
+  line-height: 1.6;
+}
+
+.hero-features {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.feature-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Master Layout */
+.workspace-grid {
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) minmax(560px, 1.15fr);
+  gap: 32px;
+  align-items: start;
+}
+
+/* Editor Panel */
+.editor-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--slate-300);
+  box-shadow: var(--shadow-md);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--primary-50);
+  color: var(--primary-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-title-group h3 {
+  margin: 0;
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--slate-900);
+}
+
+.card-subtitle {
+  margin: 3px 0 0;
+  font-size: 12.5px;
+  color: var(--slate-500);
+}
+
+/* Tab Navigation inside Card */
+.form-section-title {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-700);
+  margin: 18px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--slate-200);
+}
+
+/* Field Grid */
+.fields-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field.col-span-2 {
+  grid-column: span 2;
+}
+
+.field label {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--slate-700);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field label .opt {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--slate-400);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  right: 12px;
+  color: var(--slate-400);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.field input[type="text"],
+.field select,
+.field textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--slate-800);
+  background-color: var(--slate-50);
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.field select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 12px center;
+  padding-left: 36px;
+}
+
+.field textarea {
+  min-height: 90px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+  background-color: var(--white);
+  border-color: var(--slate-300);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  background-color: var(--white);
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3.5px rgba(37, 99, 235, 0.12);
+}
+
+/* File Upload Custom styling */
+.custom-file-upload {
+  border: 2px dashed var(--slate-300);
+  background: var(--slate-50);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.custom-file-upload:hover {
+  border-color: var(--primary-500);
+  background: var(--primary-50);
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-info-text .file-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--slate-700);
+}
+
+.file-info-text .file-hint {
+  font-size: 11.5px;
+  color: var(--slate-400);
+}
+
+/* Radio Pill Group */
+.radio-pill-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.radio-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--slate-50);
+  border: 1.5px solid var(--slate-200);
+  border-radius: 99px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate-700);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.radio-pill input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-pill:hover {
+  background: var(--white);
+  border-color: var(--slate-300);
+}
+
+.radio-pill.active,
+.radio-pill:has(input:checked) {
+  background: var(--primary-50);
+  border-color: var(--primary-500);
+  color: var(--primary-700);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* Students List Dynamic UI */
+.students-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.student-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.student-row input {
+  flex: 1;
+}
+
+.btn-icon-danger {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: var(--danger-50);
+  border: 1px solid var(--danger-border);
+  color: var(--danger-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-icon-danger:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  transform: scale(1.04);
+}
+
+.btn-add-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: 1.5px dashed var(--primary-500);
+  color: var(--primary-600);
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-add-item:hover {
+  background: var(--primary-50);
+  border-style: solid;
+}
+
+/* Action Buttons Bar */
+.action-buttons-bar {
+  display: flex;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--slate-100);
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 13.5px;
+  padding: 11px 22px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-500) 100%);
+  color: white;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  background: var(--slate-100);
+  color: var(--slate-700);
+  border: 1px solid var(--slate-200);
+}
+
+.btn-secondary:hover {
+  background: var(--slate-200);
+  color: var(--slate-900);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--slate-600);
+  border: 1px solid var(--slate-300);
+}
+
+.btn-outline:hover {
+  background: var(--slate-50);
+  border-color: var(--slate-400);
+}
+
+/* ================= Preview Section ================= */
+.preview-column {
+  position: sticky;
+  top: 86px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.preview-toolbar {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+}
+
+.preview-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.preview-title {
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--slate-800);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.preview-badge {
+  background: var(--primary-50);
+  color: var(--primary-700);
+  border: 1px solid var(--primary-100);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.preview-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.font-size-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-inline: 6px;
+  color: var(--slate-700);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.font-size-controls button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--slate-700);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.font-size-controls button:hover:not(:disabled) { background: var(--slate-100); }
+.font-size-controls button:disabled { opacity: .45; cursor: not-allowed; }
+
+.zoom-btn {
+  background: var(--slate-100);
+  border: 1px solid var(--slate-200);
+  color: var(--slate-600);
+  border-radius: var(--radius-sm);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.zoom-btn:hover {
+  background: var(--slate-200);
+  color: var(--slate-900);
+}
+
+/* Sheet Stage Container */
+.sheet-stage {
+  background: linear-gradient(145deg, #dce4ee 0%, #cbd6e4 100%);
+  border-radius: var(--radius-xl);
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--slate-200);
+  overflow-x: auto;
+  max-height: calc(100vh - 170px);
+  overflow-y: auto;
+}
+
+/* ================= The A4 Academic Sheet ================= */
+.academic-sheet {
+  width: 100%;
+  max-width: 580px;
+  aspect-ratio: 210 / 297;
+  background: #ffffff;
+  color: #111827;
+  box-shadow: var(--shadow-sheet);
+  position: relative;
+  padding: 7.2% 8.6%;
+  font-family: var(--font-academic);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  box-sizing: border-box;
+  transform-origin: top center;
+  transition: transform 0.2s ease, font-size 0.15s ease;
+  user-select: text;
+}
+
+/* Republic Header */
+.republic-header {
+  font-size: 1.14em;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+}
+
+.ministry-header {
+  font-size: 1.05em;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #262626;
+  margin-bottom: 8px;
+}
+
+/* University & Faculty block */
+.institution-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sheet-university {
+  font-size: 1.28em;
+  font-weight: 800;
+  color: #0c1e38;
+  line-height: 1.35;
+}
+
+.sheet-faculty {
+  font-size: 1.12em;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.35;
+}
+
+.sheet-department {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: #334155;
+  line-height: 1.35;
+}
+
+/* University Logo */
+.sheet-logo-container {
+  margin: 10px auto;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sheet-logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+}
+
+.sheet-logo-placeholder {
+  width: 82px;
+  height: 82px;
+  border: 1.8px solid #059669;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 150, 105, 0.04);
+  color: #047857;
+  font-size: 10.5px;
+  line-height: 1.3;
+  padding: 6px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+}
+
+/* Metadata pills (Field & Specialization) */
+.academic-meta-strip {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 1.08em;
+  font-weight: 700;
+  margin: 6px 0 12px;
+  border-top: 1px dashed #d1d5db;
+  border-bottom: 1px dashed #d1d5db;
+  padding: 5px 0;
+}
+
+.academic-meta-item span.label {
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.academic-meta-item span.value {
+  color: #111827;
+  font-weight: 800;
+}
+
+/* Thesis Title Box */
+.thesis-section {
+  margin: 12px 0;
+}
+
+.thesis-label {
+  font-size: 1.15em;
+  font-weight: 800;
+  color: #1e3a5f;
+  text-align:right;
+  margin-bottom: 4px;
+}
+.thesis-images {
+  display: none;
+  width: 88%;
+  max-width: 470px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: 10px;
+  margin: 12px auto;
+}
+.thesis-images.has-images { display: grid; }
+.thesis-images img {
+  display: block;
+  width: 100%;
+  height: 118px;
+  object-fit: contain;
+  padding: 6px;
+  border: 1px solid #dbe3ee;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, .08);
+}
+.thesis-images img:only-child { grid-column: 1 / -1; justify-self: center; width: min(100%, 340px); height: 170px; }
+html[dir="ltr"] .thesis-label{text-align:left}
+html[dir="ltr"] .people-grid{text-align:left}
+
+.thesis-title-box {
+  border: 2.5px solid #111827;
+  padding: 12px 18px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 78px;
+  background: rgba(248, 250, 252, 0.4);
+  border-radius: 3px;
+  position: relative;
+}
+
+.thesis-title-box::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1px solid #6b7280;
+  pointer-events: none;
+}
+
+.thesis-title-text {
+  font-size: 1.68em;
+  font-weight: 900;
+  line-height: 1.45;
+  color: #000;
+  word-break: break-word;
+}
+
+.thesis-degree-line {
+  margin-top: 8px;
+  font-size: 1.12em;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* People Columns (Students & Supervisor) */
+.people-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  text-align: right;
+  margin: 18px 0 8px;
+  font-size: 1.08em;
+}
+
+.people-block {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.people-title {
+  font-weight: 800;
+  color: #0f172a;
+  border-bottom: 1.5px solid #334155;
+  padding-bottom: 3px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.people-names-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 700;
+  color: #1e293b;
+  padding-right: 4px;
+}
+
+.people-name-item {
+  line-height: 1.5;
+}
+
+.placeholder-dots {
+  color: #9ca3af;
+  letter-spacing: 2px;
+  font-family: sans-serif;
+}
+
+/* Academic Year */
+.academic-year-footer {
+  margin-top: 14px;
+  font-size: 1.18em;
+  font-weight: 800;
+  color: #111827;
+  border-top: 1.5px solid #1f2937;
+  padding-top: 6px;
+}
+
+/* ================= Sheet Decorative Frames ================= */
+.academic-sheet.frame-simple::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 2px solid #173b6b;
+  pointer-events: none;
+}
+
+.academic-sheet.frame-double::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 4.5px double #173b6b;
+  pointer-events: none;
+}
+
+.academic-sheet.frame-classic::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 5px double #b4852c;
+  outline: 1.5px solid #b4852c;
+  outline-offset: -12px;
+  pointer-events: none;
+}
+
+.academic-sheet.frame-islamic::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 2px solid #0f2b48;
+  outline: 1px dashed #c29543;
+  outline-offset: -6px;
+  pointer-events: none;
+}
+
+/* Template Themes Switcher */
+.template-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.template-card {
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  background: var(--white);
+  transition: all 0.2s ease;
+}
+
+.template-card:hover {
+  border-color: var(--primary-500);
+}
+
+.template-card.active {
+  border-color: var(--primary-500);
+  background: var(--primary-50);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.template-preview-box {
+  height: 38px;
+  border-radius: 4px;
+  background: #f8fafc;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.template-name {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--slate-700);
+}
+
+/* Toast Message */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  background: var(--slate-900);
+  color: white;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1000;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1180px) {
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+  .preview-column {
+    position: static;
+  }
+  .sheet-stage {
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  html,body{width:100%;overflow-x:hidden}
+  .top-bar{padding:10px 14px;gap:10px}
+  .brand-badge{min-width:0;gap:10px}
+  .logo-symbol{width:40px;height:40px;flex:0 0 40px;font-size:20px}
+  .brand-text{min-width:0}
+  .brand-text h1{font-size:16px;flex-wrap:wrap;gap:5px}
+  .brand-text h1 span.badge{font-size:9px;padding:2px 6px}
+  .brand-text p{font-size:11px;line-height:1.35}
+  .header-actions{gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .header-actions .btn{padding:8px 10px;font-size:11px;min-height:40px}
+  .language-select{min-width:92px}
+  .app-container {
+    padding: 14px 12px 24px;
+  }
+  .workspace-grid{gap:16px}
+  .editor-panel{gap:14px}
+  .card{padding:16px;border-radius:15px}
+  .card-header{margin-bottom:15px;padding-bottom:11px}
+  .card-title-group h3{font-size:15px}
+  .card-subtitle{font-size:11.5px;line-height:1.4}
+  .hero-banner {
+    padding: 18px;border-radius:16px;margin-bottom:16px;
+  }
+  .hero-titles h2 {
+    font-size: 19px;line-height:1.35;
+  }
+  .hero-titles p{font-size:13px}
+  .hero-features {
+    display: none;
+  }
+  .fields-grid {
+    grid-template-columns: 1fr;
+    gap:12px;
+  }
+  .field.col-span-2 {
+    grid-column: span 1;
+  }
+  .field input[type="text"],.field select,.field textarea{font-size:16px;min-height:48px;padding:12px;border-radius:11px}
+  .field textarea{min-height:108px}
+  .custom-file-upload{padding:12px;gap:8px;flex-wrap:wrap}
+  .file-info{gap:8px;min-width:0}
+  .file-info-text .file-title{font-size:12px}
+  .file-info-text .file-hint{font-size:10.5px}
+  .radio-pill-group{gap:7px}
+  .radio-pill{padding:8px 10px;font-size:12px}
+  .action-buttons-bar{display:grid;grid-template-columns:1fr;gap:9px}
+  .action-buttons-bar .btn{width:100%;justify-content:center;min-height:46px}
+  .preview-toolbar{padding:10px 12px;gap:9px;flex-wrap:wrap}
+  .preview-info{width:100%;justify-content:space-between}
+  .preview-title{font-size:13px}
+  .preview-actions{width:100%;justify-content:flex-end}
+  .preview-actions .btn{min-height:40px}
+  .sheet-stage {
+    padding:8px;border-radius:14px;overflow-x:hidden;
+  }
+  .academic-sheet {
+    width:100%;max-width:580px;flex-shrink:0;
+    padding: 6% 6%;font-size:clamp(9px,3.2vw,13px);
+  }
+  .sheet-logo-container{width:68px;height:68px;margin:7px auto}
+  .sheet-logo-placeholder{width:62px;height:62px}
+  .academic-meta-strip{gap:8px;flex-wrap:wrap;font-size:.95em;margin:5px 0 8px;padding:4px 0}
+  .thesis-section{margin:8px 0}
+  .thesis-title-box{padding:8px 10px;min-height:62px}
+  .thesis-title-text{font-size:1.45em;line-height:1.35}
+  .people-grid{gap:10px;margin:10px 0 6px;font-size:.94em}
+  .people-title{font-size:.92em;gap:3px}
+  .people-title svg{width:13px;height:13px}
+  .academic-year-footer{margin-top:9px;font-size:1.02em;padding-top:4px}
+  body{padding-bottom:calc(82px + env(safe-area-inset-bottom))}
+  .editor-panel,.preview-column{scroll-margin-top:82px}
+  .mobile-nav{
+    position:fixed;inset:auto 0 0;z-index:120;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:4px;
+    padding:7px 10px calc(7px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.96);border-top:1px solid var(--slate-200);
+    box-shadow:0 -8px 24px rgba(15,35,65,.12);backdrop-filter:blur(14px);
+  }
+  .mobile-nav-item{
+    min-height:54px;border:0;border-radius:13px;background:transparent;
+    color:var(--slate-500);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:3px;font:600 11px/1.2 var(--font-ui);cursor:pointer;
+  }
+  .mobile-nav-item svg{width:19px;height:19px}
+  .mobile-nav-item.active{background:var(--primary-50);color:var(--primary-700)}
+  .mobile-nav-item:active{transform:scale(.97)}
+  .toast{left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom));justify-content:center;text-align:center;font-size:12px}
+}
+
+@media (max-width: 480px){
+  .top-bar{display:flex;flex-direction:column;align-items:stretch}
+  .brand-badge{width:100%}
+  .brand-text p{display:none}
+  .header-actions{width:100%;justify-content:space-between}
+  .header-actions #quickSampleBtn,.header-actions #topPrintBtn{flex:1;justify-content:center}
+  .language-select{flex:0 0 96px}
+  .app-container{padding-inline:9px}
+  .card{padding:13px}
+  .sheet-stage{padding:6px}
+  .preview-badge{font-size:9px;padding:2px 6px}
+  .mobile-nav{gap:2px;padding-inline:6px}
+  .mobile-nav-item{font-size:10px;min-height:52px}
+}
+
+/* ================= Professional Print Mode ================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+  }
+
+  header, 
+  .mobile-nav,
+  .hero-banner, 
+  .editor-panel, 
+  .preview-toolbar, 
+  .toast,
+  .brand-badge,
+  .sheet-stage > *:not(.academic-sheet) {
+    display: none !important;
+  }
+
+  .app-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  .workspace-grid {
+    display: block !important;
+  }
+
+  .preview-column {
+    position: static !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .sheet-stage {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .academic-sheet {
+    width: 210mm !important;
+    height: 297mm !important;
+    max-width: 210mm !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+    aspect-ratio: auto !important;
+    padding: 14mm 16mm 14mm 16mm !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    font-size: 15.5pt !important;
+    line-height: 1.4 !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    transform: none !important;
+  }
+
+  .academic-sheet.frame-simple::before {
+    inset: 9mm !important;
+    border-width: 2pt !important;
+  }
+
+  .academic-sheet.frame-double::before {
+    inset: 8mm !important;
+    border-width: 4pt !important;
+  }
+
+  .academic-sheet.frame-classic::before {
+    inset: 8mm !important;
+    border-width: 4.5pt !important;
+    outline-offset: -10mm !important;
+  }
+
+  .sheet-logo-container {
+    width: 25mm !important;
+    height: 25mm !important;
+    margin: 3mm auto !important;
+  }
+
+  .thesis-title-box {
+    min-height: 22mm !important;
+    padding: 3mm 6mm !important;
+  }
+
+  .thesis-title-text {
+    font-size: 1.65em !important;
+  }
+
+  .thesis-images { width: 88%; gap: 3mm; margin: 3mm auto; }
+  .thesis-images img { height: 28mm; padding: 1.5mm; border-radius: 2mm; box-shadow: none; }
+  .thesis-images img:only-child { width: min(100%, 110mm); height: 40mm; }
+
+  .academic-meta-strip {
+    margin: 3mm 0 !important;
+    padding: 2mm 0 !important;
+  }
+
+  .people-grid {
+    margin: 4mm 0 2mm !important;
+    gap: 8mm !important;
+  }
+
+  .academic-year-footer {
+    margin-top: 4mm !important;
+    padding-top: 2mm !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="top-bar">
+    <div class="brand-badge">
+      <div class="logo-symbol">غ</div>
+      <div class="brand-text">
+        <h1 class="">واجهة البحث <span class="badge">النسخة المجانية 100%.</span></h1>
+      </div>
+    </div>
+    <div class="header-actions">
+      <select class="btn btn-outline language-select" id="languageSelect" aria-label="لغة الواجهة">
+        <option value="ar" selected>العربية</option>
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+      </select>
+      <button class="btn btn-outline" id="quickSampleBtn" title="ملء نموذج جاهز">
+        <i data-lucide="sparkles" style="width:16px;height:16px;"></i>
+        نموذج جاهز
+      </button>
+      <button class="btn btn-primary" id="topPrintBtn">
+        <i data-lucide="printer" style="width:16px;height:16px;"></i>
+        تحميل PDF
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="app-container">
+  <!-- Hero Banner -->
+  
+
+  <!-- Workspace Grid -->
+  <div class="workspace-grid">
+
+    <!-- Left / Controls Column -->
+    <div class="editor-panel" id="editorPanel">
+      
+      <!-- Institutional Info Card -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon-wrap">
+              <i data-lucide="building-2" style="width:18px;height:18px;"></i>
+            </div>
+            <div>
+              <h3 class="">المعلومات المؤسساتية</h3>
+              <p class="card-subtitle">الجامعة، الكلية، القسم والشعار الأكاديمي</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fields-grid">
+          <div class="field col-span-2">
+            <label for="university" class="">الجامعة / المركز الجامعي</label>
+            <select id="university">
+              <option value="">اختر جامعة من القائمة المعتمدة...</option>
+              <option value="جامعة عمار ثليجي بالأغواط" selected>جامعة عمار ثليجي بالأغواط</option>
+              <option value="جامعة هواري بومدين للعلوم والتكنولوجيا – الجزائر">جامعة هواري بومدين للعلوم والتكنولوجيا – الجزائر</option>
+              <option value="جامعة الجزائر 1 – بن يوسف بن خدة">جامعة الجزائر 1 – بن يوسف بن خدة</option>
+              <option value="جامعة الجزائر 2 – أبو القاسم سعد الله">جامعة الجزائر 2 – أبو القاسم سعد الله</option>
+              <option value="جامعة الجزائر 3 – إبراهيم سلطان شيبوط">جامعة الجزائر 3 – إبراهيم سلطان شيبوط</option>
+              <option value="جامعة قسنطينة 1 – الإخوة منتوري">جامعة قسنطينة 1 – الإخوة منتوري</option>
+              <option value="جامعة قسنطينة 2 – عبد الحميد مهري">جامعة قسنطينة 2 – عبد الحميد مهري</option>
+              <option value="جامعة قسنطينة 3 – صالح بوبنيدر">جامعة قسنطينة 3 – صالح بوبنيدر</option>
+              <option value="جامعة سطيف 1 – فرحات عباس">جامعة سطيف 1 – فرحات عباس</option>
+              <option value="جامعة سطيف 2 – لمين دباغين">جامعة سطيف 2 – لمين دباغين</option>
+              <option value="جامعة أحمد بن بلة 1 – وهران">جامعة أحمد بن بلة 1 – وهران</option>
+              <option value="جامعة محمد بوضياف للعلوم والتكنولوجيا – وهران">جامعة محمد بوضياف للعلوم والتكنولوجيا – وهران</option>
+              <option value="جامعة وهران 2 – محمد بن أحمد">جامعة وهران 2 – محمد بن أحمد</option>
+              <option value="جامعة أبو بكر بلقايد – تلمسان">جامعة أبو بكر بلقايد – تلمسان</option>
+              <option value="جامعة باتنة 1 – الحاج لخضر">جامعة باتنة 1 – الحاج لخضر</option>
+              <option value="جامعة باتنة 2 – مصطفى بن بولعيد">جامعة باتنة 2 – مصطفى بن بولعيد</option>
+              <option value="جامعة عنابة – باجي مختار">جامعة عنابة – باجي مختار</option>
+              <option value="جامعة بسكرة – محمد خيضر">جامعة بسكرة – محمد خيضر</option>
+              <option value="جامعة ورقلة – قاصدي مرباح">جامعة ورقلة – قاصدي مرباح</option>
+              <option value="جامعة الجلفة – زيان عاشور">جامعة الجلفة – زيان عاشور</option>
+              <option value="جامعة البويرة – آكلي محند أولحاج">جامعة البويرة – آكلي محند أولحاج</option>
+              <option value="جامعة البليدة 1 – سعد دحلب">جامعة البليدة 1 – سعد دحلب</option>
+              <option value="جامعة البليدة 2 – لونيسي علي">جامعة البليدة 2 – لونيسي علي</option>
+              <option value="جامعة بجاية – عبد الرحمان ميرة">جامعة بجاية – عبد الرحمان ميرة</option>
+              <option value="جامعة تيزي وزو – مولود معمري">جامعة تيزي وزو – مولود معمري</option>
+              <option value="جامعة بومرداس – محمد بوقرة">جامعة بومرداس – محمد بوقرة</option>
+              <option value="جامعة المسيلة – محمد بوضياف">جامعة المسيلة – محمد بوضياف</option>
+              <option value="جامعة الوادي – حمة لخضر">جامعة الوادي – حمة لخضر</option>
+              <option value="جامعة جيجل – محمد الصديق بن يحي">جامعة جيجل – محمد الصديق بن يحي</option>
+              <option value="جامعة تبسة – العربي التبسي">جامعة تبسة – العربي التبسي</option>
+              <option value="جامعة سكيكدة – 20 أوت 1955">جامعة سكيكدة – 20 أوت 1955</option>
+              <option value="جامعة قالمة – 08 ماي 1945">جامعة قالمة – 08 ماي 1945</option>
+              <option value="جامعة مستغانم – عبد الحميد ابن باديس">جامعة مستغانم – عبد الحميد ابن باديس</option>
+              <option value="جامعة سيدي بلعباس – جيلالي ليابس">جامعة سيدي بلعباس – جيلالي ليابس</option>
+              <option value="جامعة الشلف – حسيبة بن بوعلي">جامعة الشلف – حسيبة بن بوعلي</option>
+              <option value="جامعة تيارت – ابن خلدون">جامعة تيارت – ابن خلدون</option>
+              <option value="جامعة غرداية">جامعة غرداية</option>
+              <option value="جامعة أدرار – أحمد دراية">جامعة أدرار – أحمد دراية</option>
+              <option value="جامعة بشار – طاهري محمد">جامعة بشار – طاهري محمد</option>
+              <option value="جامعة تامنغست">جامعة تامنغست</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="faculty" class="">الكلية أو المعهد</label>
+            <input type="text" id="faculty" value="">
+          </div>
+
+          <div class="field">
+            <label for="department" class="">القسم الأكاديمي</label>
+            <input type="text" id="department" value="">
+          </div>
+
+          <div class="field col-span-2">
+            <label class="">شعار الجامعة أو المؤسسة <span class="opt">(صورة PNG أو JPG)</span></label>
+            <label class="custom-file-upload" for="logoFile">
+              <div class="file-info">
+                <i data-lucide="image-plus" style="width:22px;height:22px;color:var(--primary-600);"></i>
+                <div class="file-info-text">
+                  <div class="file-title" id="logoUploadText">اضغط هنا لرفع شعار مخصص من جهازك</div>
+                  <div class="file-hint">يُفضّل استخدام صورة بخلفية شفافة PNG لدقة أعلى في الطباعة</div>
+                </div>
+              </div>
+              <span class="btn btn-secondary" style="padding:6px 12px;font-size:12px;">تصفح</span>
+            </label>
+            <input id="logoFile" type="file" accept="image/*" style="display:none;">
+          </div>
+        </div>
+      </section>
+
+      <!-- Academic Specialization & Title -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon-wrap" style="background:#ecfdf5;color:#059669;">
+              <i data-lucide="graduation-cap" style="width:18px;height:18px;"></i>
+            </div>
+            <div>
+              <h3 class="">بيانات المذكرة وموضوع البحث</h3>
+              <p class="card-subtitle">الدرجة العلمية، التخصص والعنوان المعتمد</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fields-grid">
+          <div class="field">
+            <label for="field" class="">الميدان الأكاديمي</label>
+            <input type="text" id="field" value="">
+          </div>
+
+          <div class="field">
+            <label for="degreeType" class="">نوع المذكرة / الشهادة</label>
+            <select id="degreeType">
+              <option value="">(اختر أو حدد نوع المذكرة)</option>
+              <option value="مذكرة مكملة لنيل شهادة الماستر أكاديمي">مذكرة مكملة لنيل شهادة الماستر أكاديمي</option>
+              <option value="أطروحة مكملة لنيل شهادة دكتوراه العلوم">أطروحة مكملة لنيل شهادة دكتوراه العلوم</option>
+              <option value="أطروحة مكملة لنيل شهادة الدكتوراه الطور الثالث LMD">أطروحة مكملة لنيل شهادة الدكتوراه الطور الثالث LMD</option>
+              <option value="مذكرة تخرج لنيل شهادة الليسانس">مذكرة تخرج لنيل شهادة الليسانس</option>
+              <option value="مذكرة تخرج مهندس دولة">مذكرة تخرج مهندس دولة</option>
+              <option value="الأعمال الموجّهة TD">الأعمال الموجّهة TD</option>
+              <option value="الأعمال التطبيقية TP">الأعمال التطبيقية TP</option>
+              <option value="عنوان البحث" selected>عنوان البحث</option>
+            </select>
+          </div>
+
+          <div class="field col-span-2" id="tdTpNumberField" style="display:none;">
+            <label for="tdTpNumber">رقم الحصة</label>
+            <input type="number" id="tdTpNumber" min="1" max="99" step="1" value="1">
+          </div>
+
+          <div class="field">
+            <label for="degreeField" class="">الشعبة / التخصص العام</label>
+            <input type="text" id="degreeField" value="">
+          </div>
+
+          <div class="field">
+            <label for="specialty" class="">التخصص الدقيق</label>
+            <input type="text" id="specialty" value="">
+          </div>
+
+          <div class="field col-span-2">
+            <label for="title" class="">عنوان البحث / المذكرة بالكامل</label>
+            <textarea id="title" placeholder="اكتب العنوان الرسمي المعتمد للمذكرة..."></textarea>
+          </div>
+
+          <div class="field col-span-2">
+            <label for="thesisImagesInput">صور توضيحية فوق عنوان البحث <span class="opt">(حتى 4 صور)</span></label>
+            <input id="thesisImagesInput" type="file" accept="image/*" multiple>
+            <button class="btn btn-outline" id="clearThesisImagesBtn" type="button" style="margin-top:8px;display:none;">حذف الصور</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Students & Supervisor -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon-wrap" style="background:#fef3c7;color:#d97706;">
+              <i data-lucide="users" style="width:18px;height:18px;"></i>
+            </div>
+            <div>
+              <h3 class="">الهيئة البحثية والمشرف</h3>
+              <p class="card-subtitle">الطلبة الباحثون وهيئة الإشراف الأكاديمي</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fields-grid">
+          <div class="field col-span-2">
+            <label class="">قائمة الطلبة الباحثين <span class="opt">(يمكن إضافة طالب أو أكثر)</span></label>
+            <div class="students-container" id="students"></div>
+            <div>
+              <button class="btn-add-item" type="button" id="addStudent">
+                <i data-lucide="plus" style="width:15px;height:15px;"></i>
+                إضافة طالب(ة) آخر
+              </button>
+            </div>
+          </div>
+
+          <div class="field col-span-2" style="margin-top:6px;">
+            <label class="">صفة المشرف الأكاديمي</label>
+            <div class="radio-pill-group">
+              <label class="radio-pill active">
+                <input type="radio" name="supervisorTitle" value="الأستاذ الدكتور" checked="">
+                الأستاذ الدكتور (أ.د)
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="supervisorTitle" value="الدكتور(ة)">
+                الدكتور(ة) (د.)
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="supervisorTitle" value="الأستاذ(ة) المحاضر(ة)">
+                الأستاذ(ة) المحاضر(ة)
+              </label>
+            </div>
+          </div>
+
+          <div class="field col-span-2">
+            <label for="supervisor" class="">اسم ولقب الأستاذ المشرف</label>
+            <input type="text" id="supervisor" value="">
+          </div>
+
+          <div class="field">
+            <label for="year" class="">السنة الجامعية</label>
+            <input type="text" id="year" value="">
+          </div>
+
+          <div class="field">
+            <label for="frameStyle" class="">نمط إطار الغلاف الأكاديمي</label>
+            <select id="frameStyle">
+              <option value="frame-simple">إطار جامعي بسيط ورسمي</option>
+              <option value="frame-double">إطار هندسي مزدوج</option>
+              <option value="frame-classic">إطار أكاديمي مذهّب كلاسيكي</option>
+              <option value="frame-islamic">إطار بتطعيم زخرفي رسمي</option>
+              <option value="" selected>بدون إطار خارجي</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="action-buttons-bar">
+          <button class="btn btn-primary" id="mainPrintBtn" type="button">
+            <i data-lucide="printer" style="width:16px;height:16px;"></i>
+            تحميل الغلاف PDF
+          </button>
+          <button class="btn btn-secondary" id="resetBtn" type="button">
+            <i data-lucide="rotate-ccw" style="width:16px;height:16px;"></i>
+            استعادة البيانات الأصلية
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Right / Live Preview Column -->
+    <div class="preview-column" id="previewColumn">
+      
+      <!-- Preview Toolbar -->
+      <div class="preview-toolbar">
+        <div class="preview-info">
+          <div class="preview-title">
+            <i data-lucide="eye" style="width:16px;height:16px;color:var(--primary-600);"></i>
+            المعاينة الحية للغلاف
+          </div>
+          <span class="preview-badge">معيار A4 الجامعي</span>
+        </div>
+        <div class="preview-actions">
+          <div class="font-size-controls" role="group" aria-label="حجم الخط">
+            <button type="button" id="decreaseFontBtn" aria-label="تصغير الخط" title="تصغير الخط">A−</button>
+            <span id="fontSizeValue" aria-live="polite">100%</span>
+            <button type="button" id="increaseFontBtn" aria-label="تكبير الخط" title="تكبير الخط">A+</button>
+          </div>
+          <button class="btn btn-outline" style="padding:6px 12px;font-size:12px;" id="fitScreenBtn">
+            <i data-lucide="maximize-2" style="width:14px;height:14px;"></i>
+            ملاءمة الحجم
+          </button>
+          <button class="btn btn-primary" style="padding:6px 14px;font-size:12px;" id="sidePrintBtn">
+            <i data-lucide="file-down" style="width:14px;height:14px;"></i>
+            تحميل PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Stage container with scroll/scale -->
+      <div class="sheet-stage" id="sheetStage">
+        
+        <!-- Live Academic A4 Sheet -->
+        <article class="academic-sheet frame-double" id="academicSheet">
+          
+          <!-- Top Section -->
+          <div>
+            <div class="republic-header">الجمهوريــة الجزائريــة الديمقراطيــة الشعبيــة</div>
+            <div class="ministry-header">وزارة التعليم العالي والبحث العلمي</div>
+
+            <div class="institution-block">
+              <div class="sheet-university" id="pUniversity">جامعة عمار ثليجي بالأغواط</div>
+              <div class="sheet-faculty" id="pFaculty"></div>
+              <div class="sheet-department" id="pDepartment"></div>
+            </div>
+
+            <!-- University Logo Centerpiece -->
+            <div class="sheet-logo-container">
+              <!-- Default built-in vector academic emblem if no image is uploaded -->
+              <div class="sheet-logo-placeholder" id="pLogoPlaceholder" style="display:none;">
+                <i data-lucide="landmark" style="width:26px;height:26px;margin-bottom:2px;"></i>
+                <span class="">شعار الجامعة</span>
+              </div>
+              <img class="sheet-logo-img" id="pLogoImg" style="display:block;" alt="شعار جامعة عمار ثليجي بالأغواط" src="logoammar.jpg">
+            </div>
+
+            <!-- Academic Field & Specialty Strip -->
+            <div class="academic-meta-strip">
+              <div class="academic-meta-item">
+                <span class="label">الميدان:</span>
+                <span class="value" id="pField"></span>
+              </div>
+              <div class="academic-meta-item">
+                <span class="label">التخصص:</span>
+                <span class="value" id="pSpecialty"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Section: Thesis Title Box -->
+          <div class="thesis-section">
+            <div class="thesis-label" id="pDegreeTitle"></div>
+            <div class="thesis-images" id="pThesisImages" aria-label="صور توضيحية للبحث"></div>
+            <div class="thesis-title-box">
+              <div class="thesis-title-text" id="pTitle"></div>
+            </div>
+            <div class="thesis-degree-line" id="pDegreeLine">
+              <span id="pDegree" class=""></span>
+              <span id="pDegreeConnector" class=""> في </span>
+              <span id="pDegreeField" class=""></span>
+            </div>
+          </div>
+
+          <!-- Bottom Section: Supervisors & Students & Academic Year -->
+          <div>
+            <div class="people-grid">
+              
+              <!-- Students List Block -->
+              <div class="people-block">
+                <div class="people-title">
+                  <i data-lucide="user-check" style="width:16px;height:16px;color:#1e3b6b;"></i>
+                  <span class="">إعداد الطلبة:</span>
+                </div>
+                <div class="people-names-list" id="pStudentsList">
+                  <!-- dynamic students injected here -->
+                </div>
+              </div>
+
+              <!-- Supervisor Block -->
+              <div class="people-block">
+                <div class="people-title">
+                  <i data-lucide="award" style="width:16px;height:16px;color:#1e3b6b;"></i>
+                  <span id="pSupervisorPrefix" class="">تحت إشراف الأستاذ الدكتور:</span>
+                </div>
+                <div class="people-names-list">
+                  <div class="people-name-item" id="pSupervisorName">د. محمد عبد الرحمان بلقاسم</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="academic-year-footer">
+              السنة الجامعية: <span id="pYear" class=""></span>
+            </div>
+          </div>
+
+        </article>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="التنقل الرئيسي">
+  <button type="button" class="mobile-nav-item active" data-target="editorPanel">
+    <i data-lucide="sliders-horizontal"></i><span>المدخلات</span>
+  </button>
+  <button type="button" class="mobile-nav-item" data-target="previewColumn">
+    <i data-lucide="eye"></i><span>المعاينة</span>
+  </button>
+  <button type="button" class="mobile-nav-item" data-action="pdf">
+    <i data-lucide="download"></i><span>تنزيل PDF</span>
+  </button>
+</nav>
+
+<div class="toast" id="toastNotification">
+  <i data-lucide="check-circle" style="width:18px;height:18px;color:#34d399;"></i>
+  <span id="toastMessage" class="">تم تجهيز الغلاف للطباعة بنجاح</span>
+</div>
+
+<script>
+// Initialize Lucide icons
+lucide.createIcons();
+
+// Data Elements references
+const fields = {
+  university: document.getElementById('university'),
+  faculty: document.getElementById('faculty'),
+  department: document.getElementById('department'),
+  field: document.getElementById('field'),
+  degreeType: document.getElementById('degreeType'),
+  degreeField: document.getElementById('degreeField'),
+  specialty: document.getElementById('specialty'),
+  title: document.getElementById('title'),
+  year: document.getElementById('year'),
+  supervisor: document.getElementById('supervisor'),
+  frameStyle: document.getElementById('frameStyle')
+};
+
+const previewTargets = {
+  university: document.getElementById('pUniversity'),
+  faculty: document.getElementById('pFaculty'),
+  department: document.getElementById('pDepartment'),
+  field: document.getElementById('pField'),
+  specialty: document.getElementById('pSpecialty'),
+  degreeTitle: document.getElementById('pDegreeTitle'),
+  title: document.getElementById('pTitle'),
+  degree: document.getElementById('pDegree'),
+  degreeField: document.getElementById('pDegreeField'),
+  degreeConnector: document.getElementById('pDegreeConnector'),
+  degreeLine: document.getElementById('pDegreeLine'),
+  supervisorName: document.getElementById('pSupervisorName'),
+  supervisorPrefix: document.getElementById('pSupervisorPrefix'),
+  year: document.getElementById('pYear')
+};
+
+const studentsContainer = document.getElementById('students');
+const pStudentsList = document.getElementById('pStudentsList');
+const academicSheet = document.getElementById('academicSheet');
+const logoFile = document.getElementById('logoFile');
+const logoUploadText = document.getElementById('logoUploadText');
+const pLogoImg = document.getElementById('pLogoImg');
+const pLogoPlaceholder = document.getElementById('pLogoPlaceholder');
+const thesisImagesInput = document.getElementById('thesisImagesInput');
+const pThesisImages = document.getElementById('pThesisImages');
+const clearThesisImagesBtn = document.getElementById('clearThesisImagesBtn');
+let thesisImageData = [];
+const uploadedLogosByUniversity = new Map();
+const amarUniversityName = 'جامعة عمار ثليجي بالأغواط';
+const amarUniversityLogo = 'logoammar.jpg';
+let currentLanguage = 'ar';
+const originalTextNodes = new WeakMap();
+const originalAttributes = new WeakMap();
+const originalDocumentTitle = document.title;
+const uiTranslations = {
+  fr: {
+    'واجهة البحث | المنصة الاحترافية لتصميم أغلفة المذكرات الأكاديمية':'Page de garde | Créateur professionnel de couvertures académiques',
+    'التنقل الرئيسي':'Navigation principale', 'المدخلات':'Saisie', 'المعاينة':'Aperçu', 'تنزيل PDF':'Télécharger PDF',
+    'واجهة البحث':'Page de garde', 'النسخة الاحترافية 2.0':'Version professionnelle 2.0',
+    'المنصة المتقدمة لتصميم وإنشاء أغلفة مذكرات التخرج والبحوث الأكاديمية الجزائريـة':'Plateforme de création de couvertures de mémoires et de travaux universitaires algériens',
+    'ملء نموذج جاهز':'Charger un exemple', 'نموذج جاهز':'Exemple', 'تحميل PDF':'Télécharger le PDF', 'تحميل الغلاف PDF':'Télécharger la couverture PDF',
+    'المعلومات المؤسساتية':'Informations institutionnelles', 'الجامعة، الكلية، القسم والشعار الأكاديمي':'Université, faculté, département et logo',
+    'الجامعة / المركز الجامعي':'Université / Centre universitaire', 'اختر جامعة من القائمة المعتمدة...':'Choisissez une université dans la liste...',
+    'جامعة عمار ثليجي بالأغواط':'Université Amar Telidji de Laghouat',
+    'جامعة هواري بومدين للعلوم والتكنولوجيا – الجزائر':'Université des sciences et de la technologie Houari Boumediene – Alger',
+    'جامعة الجزائر 1 – بن يوسف بن خدة':'Université d’Alger 1 – Benyoucef Benkhedda', 'جامعة الجزائر 2 – أبو القاسم سعد الله':'Université d’Alger 2 – Abou El Kacem Saâdallah', 'جامعة الجزائر 3 – إبراهيم سلطان شيبوط':'Université d’Alger 3 – Ibrahim Sultan Chebouti',
+    'جامعة قسنطينة 1 – الإخوة منتوري':'Université Constantine 1 – Frères Mentouri', 'جامعة قسنطينة 2 – عبد الحميد مهري':'Université Constantine 2 – Abdelhamid Mehri', 'جامعة قسنطينة 3 – صالح بوبنيدر':'Université Constantine 3 – Salah Boubnider',
+    'جامعة سطيف 1 – فرحات عباس':'Université Sétif 1 – Ferhat Abbas', 'جامعة سطيف 2 – لمين دباغين':'Université Sétif 2 – Lamine Debaghine',
+    'جامعة أحمد بن بلة 1 – وهران':'Université Oran 1 – Ahmed Ben Bella', 'جامعة محمد بوضياف للعلوم والتكنولوجيا – وهران':'Université des sciences et de la technologie d’Oran – Mohamed Boudiaf', 'جامعة وهران 2 – محمد بن أحمد':'Université Oran 2 – Mohamed Ben Ahmed',
+    'جامعة أبو بكر بلقايد – تلمسان':'Université Abou Bekr Belkaïd – Tlemcen', 'جامعة باتنة 1 – الحاج لخضر':'Université Batna 1 – Hadj Lakhder', 'جامعة باتنة 2 – مصطفى بن بولعيد':'Université Batna 2 – Mustapha Ben Boulaïd',
+    'جامعة عنابة – باجي مختار':'Université Badji Mokhtar – Annaba', 'جامعة بسكرة – محمد خيضر':'Université Mohamed Khider – Biskra', 'جامعة ورقلة – قاصدي مرباح':'Université Kasdi Merbah – Ouargla',
+    'جامعة الجلفة – زيان عاشور':'Université Ziane Achour – Djelfa', 'جامعة البويرة – آكلي محند أولحاج':'Université Akli Mohand Oulhadj – Bouira', 'جامعة البليدة 1 – سعد دحلب':'Université Blida 1 – Saad Dahlab', 'جامعة البليدة 2 – لونيسي علي':'Université Blida 2 – Lounici Ali',
+    'جامعة بجاية – عبد الرحمان ميرة':'Université Abderrahmane Mira – Béjaïa', 'جامعة تيزي وزو – مولود معمري':'Université Mouloud Mammeri – Tizi Ouzou', 'جامعة بومرداس – محمد بوقرة':'Université M’Hamed Bougara – Boumerdès', 'جامعة المسيلة – محمد بوضياف':'Université Mohamed Boudiaf – M’Sila',
+    'جامعة الوادي – حمة لخضر':'Université Hamma Lakhdar – El Oued', 'جامعة جيجل – محمد الصديق بن يحي':'Université Mohamed Seddik Ben Yahia – Jijel', 'جامعة تبسة – العربي التبسي':'Université Larbi Tébessi – Tébessa', 'جامعة سكيكدة – 20 أوت 1955':'Université 20 Août 1955 – Skikda', 'جامعة قالمة – 08 ماي 1945':'Université 8 Mai 1945 – Guelma',
+    'جامعة مستغانم – عبد الحميد ابن باديس':'Université Abdelhamid Ibn Badis – Mostaganem', 'جامعة سيدي بلعباس – جيلالي ليابس':'Université Djillali Liabès – Sidi Bel Abbès', 'جامعة الشلف – حسيبة بن بوعلي':'Université Hassiba Benbouali – Chlef', 'جامعة تيارت – ابن خلدون':'Université Ibn Khaldoun – Tiaret', 'جامعة غرداية':'Université de Ghardaïa', 'جامعة أدرار – أحمد دراية':'Université Ahmed Draïa – Adrar', 'جامعة بشار – طاهري محمد':'Université Tahri Mohamed – Béchar', 'جامعة تامنغست':'Université de Tamanrasset',
+    'الكلية أو المعهد':'Faculté ou institut', 'القسم الأكاديمي':'Département académique',
+    'شعار الجامعة أو المؤسسة':'Logo de l’université ou de l’établissement', '(صورة PNG أو JPG)':'(image PNG ou JPG)',
+    'اضغط هنا لرفع شعار مخصص من جهازك':'Cliquez ici pour ajouter un logo depuis votre appareil',
+    'يُفضّل استخدام صورة بخلفية شفافة PNG لدقة أعلى في الطباعة':'Une image PNG transparente est recommandée pour une meilleure qualité d’impression', 'تصفح':'Parcourir',
+    'بيانات المذكرة وموضوع البحث':'Données du mémoire et sujet de recherche', 'الدرجة العلمية، التخصص والعنوان المعتمد':'Diplôme, spécialité et titre du travail',
+    'الميدان الأكاديمي':'Domaine académique', 'نوع المذكرة / الشهادة':'Type de mémoire / diplôme',
+    '(اختر أو حدد نوع المذكرة)':'(Choisir le type de mémoire)',
+    'مذكرة مكملة لنيل شهادة الماستر أكاديمي':'Mémoire de master académique',
+    'أطروحة مكملة لنيل شهادة دكتوراه العلوم':'Thèse de doctorat ès sciences',
+    'أطروحة مكملة لنيل شهادة الدكتوراه الطور الثالث LMD':'Thèse de doctorat (système LMD)',
+    'مذكرة تخرج لنيل شهادة الليسانس':'Mémoire de licence', 'مذكرة تخرج مهندس دولة':'Projet de fin d’études d’ingénieur d’État',
+    'الأعمال الموجّهة TD':'Travaux dirigés (TD)', 'الأعمال التطبيقية TP':'Travaux pratiques (TP)',
+    'عنوان البحث':'Titre de recherche', 'الشعبة / التخصص العام':'Filière / spécialité générale', 'التخصص الدقيق':'Spécialité',
+    'رقم الحصة':'Numéro de séance', 'رقم':'N°',
+    'عنوان البحث / المذكرة بالكامل':'Titre complet du mémoire / de la recherche', 'اكتب العنوان الرسمي المعتمد للمذكرة...':'Saisissez le titre officiel du mémoire...',
+    'صور توضيحية فوق عنوان البحث':'Images au-dessus du titre de recherche', '(حتى 4 صور)':'(Jusqu’à 4 images)', 'حذف الصور':'Supprimer les images',
+    'الهيئة البحثية والمشرف':'Étudiants et encadrement', 'الطلبة الباحثون وهيئة الإشراف الأكاديمي':'Étudiants chercheurs et encadrement académique',
+    'قائمة الطلبة الباحثين':'Liste des étudiants chercheurs', '(يمكن إضافة طالب أو أكثر)':'(Un ou plusieurs étudiants)',
+    'إضافة طالب(ة) آخر':'Ajouter un étudiant', 'صفة المشرف الأكاديمي':'Titre de l’encadrant',
+    'الأستاذ الدكتور (أ.د)':'Professeur (Pr)', 'الدكتور(ة) (د.)':'Docteur (Dr)', 'الأستاذ(ة) المحاضر(ة)':'Maître de conférences',
+    'اسم ولقب الأستاذ المشرف':'Nom de l’encadrant', 'السنة الجامعية':'Année universitaire',
+    'نمط إطار الغلاف الأكاديمي':'Style du cadre', 'إطار جامعي بسيط ورسمي':'Cadre universitaire simple',
+    'إطار هندسي مزدوج':'Cadre double', 'إطار أكاديمي مذهّب كلاسيكي':'Cadre classique doré',
+    'إطار بتطعيم زخرفي رسمي':'Cadre ornemental', 'بدون إطار خارجي':'Sans cadre',
+    'استعادة البيانات الأصلية':'Réinitialiser les données', 'المعاينة الحية للغلاف':'Aperçu de la couverture',
+    'معيار A4 الجامعي':'Format universitaire A4', 'ملاءمة الحجم':'Ajuster à l’écran', 'تصغير':'Réduire',
+    'حجم الخط':'Taille du texte', 'تصغير الخط':'Réduire la taille du texte', 'تكبير الخط':'Augmenter la taille du texte',
+    'الجمهوريــة الجزائريــة الديمقراطيــة الشعبيــة':'République algérienne démocratique et populaire',
+    'وزارة التعليم العالي والبحث العلمي':'Ministère de l’Enseignement supérieur et de la Recherche scientifique',
+    'شعار الجامعة':'Logo de l’université', 'الميدان:':'Domaine :', 'التخصص:':'Spécialité :',
+    'إعداد الطلبة:':'Préparé par :', 'تحت إشراف':'Sous la direction de', 'السنة الجامعية:':'Année universitaire :',
+    'اسم الجامعة':'Nom de l’université', 'اللغة':'Langue',
+    'حذف الطالب':'Supprimer l’étudiant', 'اسم ولقب الطالب(ة)...':'Nom et prénom de l’étudiant...',
+    'تم تجهيز الغلاف للطباعة بنجاح':'Couverture prête à être imprimée', 'تم تحميل شعار الجامعة بنجاح':'Logo de l’université chargé', 'تم تنزيل ملف PDF بنجاح.':'PDF téléchargé.',
+    'جارٍ تجهيز ملف PDF للتنزيل...':'Préparation du téléchargement PDF...',
+    'تعذر تحميل أداة PDF؛ سيتم فتح نافذة الطباعة.':'Outil PDF indisponible ; ouverture de la fenêtre d’impression.',
+    'تعذر إنشاء PDF؛ سيتم فتح نافذة الطباعة.':'Impossible de créer le PDF ; ouverture de la fenêtre d’impression.',
+    'تمت استعادة البيانات الافتراضية':'Les données par défaut ont été restaurées', 'تم تحميل نموذج إعلام آلي بنجاح':'Exemple informatique chargé',
+    'اضغط هنا لرفع شعار الجامعة المختارة':'Cliquez ici pour ajouter le logo de l’université sélectionnée',
+    'الشعار المخصص لجامعة':'Logo personnalisé pour', 'تم اختيار الشعار:':'Logo sélectionné :'
+  },
+  en: {
+    'واجهة البحث | المنصة الاحترافية لتصميم أغلفة المذكرات الأكاديمية':'Research Cover | Professional Academic Cover Designer',
+    'التنقل الرئيسي':'Main navigation', 'المدخلات':'Inputs', 'المعاينة':'Preview', 'تنزيل PDF':'Download PDF',
+    'واجهة البحث':'Research Cover', 'النسخة الاحترافية 2.0':'Professional Edition 2.0',
+    'المنصة المتقدمة لتصميم وإنشاء أغلفة مذكرات التخرج والبحوث الأكاديمية الجزائريـة':'A platform for designing Algerian thesis and academic research covers',
+    'ملء نموذج جاهز':'Load sample', 'نموذج جاهز':'Sample', 'تحميل PDF':'Download PDF', 'تحميل الغلاف PDF':'Download cover PDF',
+    'المعلومات المؤسساتية':'Institution information', 'الجامعة، الكلية، القسم والشعار الأكاديمي':'University, faculty, department, and logo',
+    'الجامعة / المركز الجامعي':'University / University Center', 'اختر جامعة من القائمة المعتمدة...':'Choose a university from the list...',
+    'جامعة عمار ثليجي بالأغواط':'Amar Telidji University of Laghouat',
+    'جامعة هواري بومدين للعلوم والتكنولوجيا – الجزائر':'University of Science and Technology Houari Boumediene – Algiers',
+    'جامعة الجزائر 1 – بن يوسف بن خدة':'University of Algiers 1 – Benyoucef Benkhedda', 'جامعة الجزائر 2 – أبو القاسم سعد الله':'University of Algiers 2 – Abou El Kacem Saâdallah', 'جامعة الجزائر 3 – إبراهيم سلطان شيبوط':'University of Algiers 3 – Ibrahim Sultan Chebouti',
+    'جامعة قسنطينة 1 – الإخوة منتوري':'Constantine 1 University – Frères Mentouri', 'جامعة قسنطينة 2 – عبد الحميد مهري':'Constantine 2 University – Abdelhamid Mehri', 'جامعة قسنطينة 3 – صالح بوبنيدر':'Constantine 3 University – Salah Boubnider',
+    'جامعة سطيف 1 – فرحات عباس':'Setif 1 University – Ferhat Abbas', 'جامعة سطيف 2 – لمين دباغين':'Setif 2 University – Lamine Debaghine',
+    'جامعة أحمد بن بلة 1 – وهران':'Oran 1 University – Ahmed Ben Bella', 'جامعة محمد بوضياف للعلوم والتكنولوجيا – وهران':'University of Science and Technology of Oran – Mohamed Boudiaf', 'جامعة وهران 2 – محمد بن أحمد':'Oran 2 University – Mohamed Ben Ahmed',
+    'جامعة أبو بكر بلقايد – تلمسان':'Abou Bekr Belkaid University – Tlemcen', 'جامعة باتنة 1 – الحاج لخضر':'Batna 1 University – Hadj Lakhder', 'جامعة باتنة 2 – مصطفى بن بولعيد':'Batna 2 University – Mustapha Ben Boulaid',
+    'جامعة عنابة – باجي مختار':'Badji Mokhtar University – Annaba', 'جامعة بسكرة – محمد خيضر':'Mohamed Khider University – Biskra', 'جامعة ورقلة – قاصدي مرباح':'Kasdi Merbah University – Ouargla',
+    'جامعة الجلفة – زيان عاشور':'Ziane Achour University – Djelfa', 'جامعة البويرة – آكلي محند أولحاج':'Akli Mohand Oulhadj University – Bouira', 'جامعة البليدة 1 – سعد دحلب':'Blida 1 University – Saad Dahlab', 'جامعة البليدة 2 – لونيسي علي':'Blida 2 University – Lounici Ali',
+    'جامعة بجاية – عبد الرحمان ميرة':'Abderrahmane Mira University – Béjaïa', 'جامعة تيزي وزو – مولود معمري':'Mouloud Mammeri University – Tizi Ouzou', 'جامعة بومرداس – محمد بوقرة':'M’Hamed Bougara University – Boumerdès', 'جامعة المسيلة – محمد بوضياف':'Mohamed Boudiaf University – M’Sila',
+    'جامعة الوادي – حمة لخضر':'Hamma Lakhdar University – El Oued', 'جامعة جيجل – محمد الصديق بن يحي':'Mohamed Seddik Ben Yahia University – Jijel', 'جامعة تبسة – العربي التبسي':'Larbi Tebessi University – Tébessa', 'جامعة سكيكدة – 20 أوت 1955':'20 August 1955 University – Skikda', 'جامعة قالمة – 08 ماي 1945':'8 May 1945 University – Guelma',
+    'جامعة مستغانم – عبد الحميد ابن باديس':'Abdelhamid Ibn Badis University – Mostaganem', 'جامعة سيدي بلعباس – جيلالي ليابس':'Djillali Liabes University – Sidi Bel Abbes', 'جامعة الشلف – حسيبة بن بوعلي':'Hassiba Benbouali University – Chlef', 'جامعة تيارت – ابن خلدون':'Ibn Khaldoun University – Tiaret', 'جامعة غرداية':'Ghardaia University', 'جامعة أدرار – أحمد دراية':'Ahmed Draia University – Adrar', 'جامعة بشار – طاهري محمد':'Tahri Mohamed University – Bechar', 'جامعة تامنغست':'Tamanrasset University',
+    'الكلية أو المعهد':'Faculty or Institute', 'القسم الأكاديمي':'Academic Department',
+    'شعار الجامعة أو المؤسسة':'University or Institution Logo', '(صورة PNG أو JPG)':'(PNG or JPG image)',
+    'اضغط هنا لرفع شعار مخصص من جهازك':'Click to upload a logo from your device',
+    'يُفضّل استخدام صورة بخلفية شفافة PNG لدقة أعلى في الطباعة':'A transparent PNG is recommended for sharper printing', 'تصفح':'Browse',
+    'بيانات المذكرة وموضوع البحث':'Thesis and Research Details', 'الدرجة العلمية، التخصص والعنوان المعتمد':'Degree, specialization, and approved title',
+    'الميدان الأكاديمي':'Academic Field', 'نوع المذكرة / الشهادة':'Thesis / Degree Type',
+    '(اختر أو حدد نوع المذكرة)':'(Select a thesis type)',
+    'مذكرة مكملة لنيل شهادة الماستر أكاديمي':'Academic Master’s Thesis',
+    'أطروحة مكملة لنيل شهادة دكتوراه العلوم':'Doctor of Science Dissertation',
+    'أطروحة مكملة لنيل شهادة الدكتوراه الطور الثالث LMD':'Doctoral Dissertation (LMD)',
+    'مذكرة تخرج لنيل شهادة الليسانس':'Bachelor’s Thesis', 'مذكرة تخرج مهندس دولة':'State Engineer Graduation Project',
+    'الأعمال الموجّهة TD':'Tutorial Classes (TD)', 'الأعمال التطبيقية TP':'Practical Classes (TP)',
+    'عنوان البحث':'Research Title', 'الشعبة / التخصص العام':'Program / General Specialization', 'التخصص الدقيق':'Specialization',
+    'رقم الحصة':'Session number', 'رقم':'No.',
+    'عنوان البحث / المذكرة بالكامل':'Full Research / Thesis Title', 'اكتب العنوان الرسمي المعتمد للمذكرة...':'Enter the approved thesis title...',
+    'صور توضيحية فوق عنوان البحث':'Images above the research title', '(حتى 4 صور)':'(Up to 4 images)', 'حذف الصور':'Remove images',
+    'الهيئة البحثية والمشرف':'Researchers and Supervisor', 'الطلبة الباحثون وهيئة الإشراف الأكاديمي':'Student researchers and academic supervisor',
+    'قائمة الطلبة الباحثين':'Student Researchers', '(يمكن إضافة طالب أو أكثر)':'(Add one or more students)',
+    'إضافة طالب(ة) آخر':'Add another student', 'صفة المشرف الأكاديمي':'Supervisor Title',
+    'الأستاذ الدكتور (أ.د)':'Professor (Prof.)', 'الدكتور(ة) (د.)':'Doctor (Dr.)', 'الأستاذ(ة) المحاضر(ة)':'Associate Professor',
+    'اسم ولقب الأستاذ المشرف':'Supervisor Name', 'السنة الجامعية':'Academic Year',
+    'نمط إطار الغلاف الأكاديمي':'Cover Frame Style', 'إطار جامعي بسيط ورسمي':'Simple Academic Frame',
+    'إطار هندسي مزدوج':'Double-Line Frame', 'إطار أكاديمي مذهّب كلاسيكي':'Classic Gold Frame',
+    'إطار بتطعيم زخرفي رسمي':'Ornamental Frame', 'بدون إطار خارجي':'No Frame',
+    'استعادة البيانات الأصلية':'Reset Data', 'المعاينة الحية للغلاف':'Live Cover Preview',
+    'معيار A4 الجامعي':'A4 Academic Format', 'ملاءمة الحجم':'Fit to Screen', 'تصغير':'Minimize',
+    'حجم الخط':'Font size', 'تصغير الخط':'Decrease font size', 'تكبير الخط':'Increase font size',
+    'الجمهوريــة الجزائريــة الديمقراطيــة الشعبيــة':'People’s Democratic Republic of Algeria',
+    'وزارة التعليم العالي والبحث العلمي':'Ministry of Higher Education and Scientific Research',
+    'شعار الجامعة':'University Logo', 'الميدان:':'Field:', 'التخصص:':'Specialization:',
+    'إعداد الطلبة:':'Prepared by:', 'تحت إشراف':'Supervised by', 'السنة الجامعية:':'Academic Year:',
+    'اسم الجامعة':'University Name', 'اللغة':'Language',
+    'حذف الطالب':'Remove student', 'اسم ولقب الطالب(ة)...':'Student full name...',
+    'تم تجهيز الغلاف للطباعة بنجاح':'Cover is ready to print', 'تم تحميل شعار الجامعة بنجاح':'University logo uploaded', 'تم تنزيل ملف PDF بنجاح.':'PDF downloaded successfully.',
+    'جارٍ تجهيز ملف PDF للتنزيل...':'Preparing PDF download...',
+    'تعذر تحميل أداة PDF؛ سيتم فتح نافذة الطباعة.':'PDF tool unavailable; opening the print dialog.',
+    'تعذر إنشاء PDF؛ سيتم فتح نافذة الطباعة.':'Could not create PDF; opening the print dialog.',
+    'تمت استعادة البيانات الافتراضية':'Default data restored', 'تم تحميل نموذج إعلام آلي بنجاح':'Computer science sample loaded',
+    'اضغط هنا لرفع شعار الجامعة المختارة':'Click to upload the selected university’s logo',
+    'الشعار المخصص لجامعة':'Custom logo for', 'تم اختيار الشعار:':'Logo selected:'
+  }
+};
+function tr(text, lang=currentLanguage){return lang==='ar'?text:(uiTranslations[lang]?.[text] || text);}
+function localizePage(lang){
+  currentLanguage = lang;
+  const direction = lang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = direction;
+  academicSheet.dir = direction;
+  document.title = tr(originalDocumentTitle, lang);
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let node;
+  while((node = walker.nextNode())){
+    if(node.parentElement?.closest('script,style,textarea')) continue;
+    if(!originalTextNodes.has(node)) originalTextNodes.set(node, node.nodeValue);
+    const original = originalTextNodes.get(node);
+    const trimmed = original.trim();
+    if(!trimmed) continue;
+    const leading = original.match(/^\s*/)[0];
+    const trailing = original.match(/\s*$/)[0];
+    node.nodeValue = `${leading}${tr(trimmed, lang)}${trailing}`;
+  }
+  document.querySelectorAll('[title],[placeholder],[aria-label]').forEach(element=>{
+    for(const attribute of ['title','placeholder','aria-label']){
+      if(!element.hasAttribute(attribute)) continue;
+      let originals = originalAttributes.get(element);
+      if(!originals){originals={};originalAttributes.set(element,originals);}
+      if(!(attribute in originals)) originals[attribute] = element.getAttribute(attribute);
+      element.setAttribute(attribute,tr(originals[attribute],lang));
+    }
+  });
+  document.getElementById('languageSelect').setAttribute('aria-label', tr('اللغة',lang));
+  studentsContainer.querySelectorAll('.student-row').forEach(row=>{
+    row.querySelector('input').placeholder = tr('اسم ولقب الطالب(ة)...',lang);
+    row.querySelector('button').title = tr('حذف الطالب',lang);
+  });
+  syncUniversityLogo();
+  updateLivePreview();
+}
+
+function syncUniversityLogo(){
+  const universityName = fields.university.value.trim();
+  const customLogo = uploadedLogosByUniversity.get(universityName);
+  const defaultLogo = universityName === amarUniversityName ? amarUniversityLogo : '';
+  const logo = customLogo || defaultLogo;
+  if(logo){
+    pLogoImg.src = logo;
+    pLogoImg.alt = `${tr('شعار الجامعة')} ${universityName}`;
+    pLogoImg.style.display = 'block';
+    pLogoPlaceholder.style.display = 'none';
+  }else{
+    pLogoImg.removeAttribute('src');
+    pLogoImg.style.display = 'none';
+    pLogoPlaceholder.style.display = 'none';
+  }
+  logoUploadText.textContent = customLogo
+    ? `${tr('الشعار المخصص لجامعة')} ${universityName}`
+    : tr('اضغط هنا لرفع شعار الجامعة المختارة');
+}
+
+// Preset Defaults
+const defaults = {
+  university: 'جامعة عمار ثليجي بالأغواط',
+  faculty: '',
+  department: '',
+  field: '',
+  degreeType: 'عنوان البحث',
+  degreeField: '',
+  specialty: '',
+  title: '',
+  year: '',
+  supervisor: '',
+  supervisorTitle: 'الأستاذ الدكتور',
+  frameStyle: '',
+  students: []
+};
+
+function showToast(msg) {
+  const toast = document.getElementById('toastNotification');
+  const toastMsg = document.getElementById('toastMessage');
+  toastMsg.textContent = tr(msg);
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function updateLivePreview() {
+  previewTargets.university.textContent = fields.university.value.trim() || tr('اسم الجامعة');
+  previewTargets.faculty.textContent = fields.faculty.value.trim();
+  previewTargets.department.textContent = fields.department.value.trim();
+  previewTargets.field.textContent = fields.field.value.trim();
+  previewTargets.specialty.textContent = fields.specialty.value.trim();
+  previewTargets.title.textContent = fields.title.value.trim();
+  
+  const degreeVal = fields.degreeType.value.trim();
+  const degreeFieldVal = fields.degreeField.value.trim();
+  const isTdTp = degreeVal === 'الأعمال الموجّهة TD' || degreeVal === 'الأعمال التطبيقية TP';
+  document.getElementById('tdTpNumberField').style.display = isTdTp ? '' : 'none';
+  const degreeLabel = degreeVal ? (fields.degreeType.selectedOptions[0]?.textContent || degreeVal) : '';
+  previewTargets.degreeTitle.textContent = degreeLabel ? `${degreeLabel}${isTdTp ? ` - ${tr('رقم')} ${document.getElementById('tdTpNumber').value || 1}` : ''}` : '';
+
+  if(degreeFieldVal) {
+    previewTargets.degreeLine.style.display = 'block';
+    previewTargets.degree.textContent = '';
+    previewTargets.degreeConnector.textContent = tr('التخصص: ');
+    previewTargets.degreeField.textContent = degreeFieldVal;
+  } else {
+    previewTargets.degreeLine.style.display = 'none';
+  }
+
+  // Supervisor
+  const checkedRadio = document.querySelector('input[name="supervisorTitle"]:checked');
+  const supTitle = checkedRadio ? checkedRadio.value : 'الأستاذ المشرف';
+  const localizedRole = {
+    'الأستاذ الدكتور': {fr:'Professeur',en:'Professor'},
+    'الدكتور(ة)': {fr:'Docteur',en:'Doctor'},
+    'الأستاذ(ة) المحاضر(ة)': {fr:'Maître de conférences',en:'Lecturer'}
+  }[supTitle]?.[currentLanguage] || supTitle;
+  previewTargets.supervisorPrefix.textContent = `${tr('تحت إشراف')} ${localizedRole}:`;
+  previewTargets.supervisorName.textContent = fields.supervisor.value.trim();
+
+  // Year
+  previewTargets.year.textContent = fields.year.value.trim();
+
+  // Frame Style
+  academicSheet.classList.remove('frame-simple', 'frame-double', 'frame-classic', 'frame-islamic');
+  if(fields.frameStyle.value) {
+    academicSheet.classList.add(fields.frameStyle.value);
+  }
+
+  // Update students
+  const studentInputs = [...studentsContainer.querySelectorAll('input')];
+  const names = studentInputs.map(input => input.value.trim()).filter(Boolean);
+  
+  if(names.length > 0) {
+    pStudentsList.innerHTML = names.map(n => `<div class="people-name-item">${escapeHtml(n)}</div>`).join('');
+  } else {
+    pStudentsList.innerHTML = '<div class="people-name-item placeholder-dots">................................</div>';
+  }
+}
+
+function escapeHtml(str) {
+  const span = document.createElement('span');
+  span.textContent = str;
+  return span.innerHTML;
+}
+
+function addStudentRow(val = '') {
+  const row = document.createElement('div');
+  row.className = 'student-row';
+  
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = tr('اسم ولقب الطالب(ة)...');
+  input.value = val;
+  input.addEventListener('input', updateLivePreview);
+
+  const removeBtn = document.createElement('button');
+  removeBtn.type = 'button';
+  removeBtn.className = 'btn-icon-danger';
+  removeBtn.title = tr('حذف الطالب');
+  removeBtn.innerHTML = '<i data-lucide="trash-2" style="width:16px;height:16px;"></i>';
+  removeBtn.addEventListener('click', () => {
+    if(studentsContainer.children.length > 1) {
+      row.remove();
+    } else {
+      input.value = '';
+    }
+    updateLivePreview();
+    lucide.createIcons();
+  });
+
+  row.appendChild(input);
+  row.appendChild(removeBtn);
+  studentsContainer.appendChild(row);
+  lucide.createIcons();
+  updateLivePreview();
+}
+
+// Event Listeners for standard fields
+Object.values(fields).forEach(el => {
+  el.addEventListener('input', updateLivePreview);
+  el.addEventListener('change', updateLivePreview);
+});
+fields.university.addEventListener('change', syncUniversityLogo);
+
+// Radio buttons for supervisor
+document.querySelectorAll('input[name="supervisorTitle"]').forEach(r => {
+  r.addEventListener('change', (e) => {
+    document.querySelectorAll('.radio-pill').forEach(pill => pill.classList.remove('active'));
+    e.target.closest('.radio-pill').classList.add('active');
+    updateLivePreview();
+  });
+});
+document.getElementById('tdTpNumber').addEventListener('input', updateLivePreview);
+
+// Add student button
+document.getElementById('addStudent').addEventListener('click', () => addStudentRow());
+
+// File Upload
+logoFile.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(file) {
+    logoUploadText.textContent = `${tr('تم اختيار الشعار:')} ${file.name}`;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      uploadedLogosByUniversity.set(fields.university.value.trim(), event.target.result);
+      syncUniversityLogo();
+      showToast('تم تحميل شعار الجامعة بنجاح');
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+function renderThesisImages(){
+  pThesisImages.replaceChildren(...thesisImageData.map((src,index)=>{
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `${tr('صور توضيحية فوق عنوان البحث')} ${index+1}`;
+    return img;
+  }));
+  pThesisImages.classList.toggle('has-images', thesisImageData.length > 0);
+  clearThesisImagesBtn.style.display = thesisImageData.length ? 'inline-flex' : 'none';
+}
+thesisImagesInput.addEventListener('change', async ()=>{
+  const files = [...thesisImagesInput.files].filter(file=>file.type.startsWith('image/')).slice(0,4);
+  thesisImageData = await Promise.all(files.map(file=>new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = ()=>resolve(reader.result);
+    reader.onerror = ()=>reject(reader.error);
+    reader.readAsDataURL(file);
+  }).catch(()=>null)));
+  thesisImageData = thesisImageData.filter(Boolean);
+  renderThesisImages();
+  if(thesisImagesInput.files.length > 4) showToast('يمكن اختيار 4 صور كحد أقصى');
+});
+clearThesisImagesBtn.addEventListener('click',()=>{
+  thesisImageData = [];
+  thesisImagesInput.value = '';
+  renderThesisImages();
+});
+
+// PDF Download
+function saveCanvasAsA4Pdf(canvas, filename){
+  const encodedJpeg = canvas.toDataURL('image/jpeg',0.98).split(',')[1];
+  const jpegBytes = Uint8Array.from(atob(encodedJpeg),char=>char.charCodeAt(0));
+  const encoder = new TextEncoder();
+  const chunks = [];
+  const offsets = Array(6).fill(0);
+  let byteOffset = 0;
+  const writeBytes = bytes=>{chunks.push(bytes);byteOffset+=bytes.length;};
+  const writeText = text=>writeBytes(encoder.encode(text));
+  const beginObject = number=>{offsets[number]=byteOffset;writeText(`${number} 0 obj\n`);};
+
+  writeText('%PDF-1.4\n');
+  beginObject(1);writeText('<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
+  beginObject(2);writeText('<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
+  beginObject(3);writeText('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>\nendobj\n');
+  beginObject(4);
+  writeText(`<< /Type /XObject /Subtype /Image /Width ${canvas.width} /Height ${canvas.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpegBytes.length} >>\nstream\n`);
+  writeBytes(jpegBytes);
+  writeText('\nendstream\nendobj\n');
+  const pageContent = 'q\n595.2756 0 0 841.8898 0 0 cm\n/Im0 Do\nQ';
+  beginObject(5);writeText(`<< /Length ${encoder.encode(pageContent).length} >>\nstream\n${pageContent}\nendstream\nendobj\n`);
+
+  const xrefOffset = byteOffset;
+  writeText('xref\n0 6\n0000000000 65535 f \n');
+  for(let number=1;number<=5;number++) writeText(`${String(offsets[number]).padStart(10,'0')} 00000 n \n`);
+  writeText(`trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`);
+
+  const blob = new Blob(chunks,{type:'application/pdf'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+
+async function triggerPdfDownload() {
+  updateLivePreview();
+  if(typeof html2canvas === 'undefined') {
+    showToast('تعذر تحميل أداة PDF؛ سيتم فتح نافذة الطباعة.');
+    window.print();
+    return;
+  }
+  showToast('جارٍ تجهيز ملف PDF للتنزيل...');
+  const universityName = fields.university.value.trim() || 'غلاف_جامعي';
+  const safeName = universityName.replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, '-');
+  try {
+    if(document.fonts?.ready) await document.fonts.ready;
+    const previewWidth = academicSheet.clientWidth;
+    const previewHeight = academicSheet.clientHeight;
+    await Promise.all([...academicSheet.querySelectorAll('img')].map(img=>img.decode ? img.decode().catch(()=>{}) : Promise.resolve()));
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+
+    // Capture the visible sheet directly; off-screen clones can render as a blank page in some browsers.
+    const canvas = await html2canvas(academicSheet, {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      width: previewWidth,
+      height: previewHeight,
+      windowWidth: Math.max(document.documentElement.clientWidth, previewWidth),
+      windowHeight: Math.max(document.documentElement.clientHeight, previewHeight),
+      scrollX: 0,
+      scrollY: 0
+    });
+
+    // Normalize the captured image to the exact portrait A4 ratio before placing it.
+    const a4Canvas = document.createElement('canvas');
+    a4Canvas.width = Math.max(70, Math.round(canvas.width / 70) * 70);
+    a4Canvas.height = (a4Canvas.width / 70) * 99;
+    const context = a4Canvas.getContext('2d');
+    context.fillStyle = '#ffffff';
+    context.fillRect(0, 0, a4Canvas.width, a4Canvas.height);
+    context.drawImage(canvas, 0, 0, a4Canvas.width, a4Canvas.height);
+
+    saveCanvasAsA4Pdf(a4Canvas,`غلاف-${safeName}.pdf`);
+    showToast('تم تنزيل ملف PDF بنجاح.');
+  } catch(error) {
+    showToast('تعذر إنشاء PDF؛ سيتم فتح نافذة الطباعة.');
+    window.print();
+  }
+}
+
+document.getElementById('topPrintBtn').addEventListener('click', triggerPdfDownload);
+document.getElementById('mainPrintBtn').addEventListener('click', triggerPdfDownload);
+document.getElementById('sidePrintBtn').addEventListener('click', triggerPdfDownload);
+
+let coverFontScale = 100;
+const fontScaleMin = 80;
+const fontScaleMax = 130;
+function setCoverFontScale(scale){
+  coverFontScale = Math.max(fontScaleMin, Math.min(fontScaleMax, scale));
+  academicSheet.style.fontSize = `${coverFontScale}%`;
+  document.getElementById('fontSizeValue').textContent = `${coverFontScale}%`;
+  document.getElementById('decreaseFontBtn').disabled = coverFontScale === fontScaleMin;
+  document.getElementById('increaseFontBtn').disabled = coverFontScale === fontScaleMax;
+}
+document.getElementById('decreaseFontBtn').addEventListener('click',()=>setCoverFontScale(coverFontScale-5));
+document.getElementById('increaseFontBtn').addEventListener('click',()=>setCoverFontScale(coverFontScale+5));
+setCoverFontScale(100);
+
+const mobileNavButtons = [...document.querySelectorAll('.mobile-nav-item')];
+function setActiveMobileNav(button){
+  mobileNavButtons.forEach(item=>{
+    const active = item === button;
+    item.classList.toggle('active', active);
+    if(active) item.setAttribute('aria-current','page');
+    else item.removeAttribute('aria-current');
+  });
+}
+mobileNavButtons.forEach(button=>button.addEventListener('click',()=>{
+  if(button.dataset.action === 'pdf'){
+    triggerPdfDownload();
+    return;
+  }
+  setActiveMobileNav(button);
+  document.getElementById(button.dataset.target)?.scrollIntoView({behavior:'smooth',block:'start'});
+}));
+if('IntersectionObserver' in window){
+  const navObserver = new IntersectionObserver(entries=>{
+    const visible = entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(!visible) return;
+    const button = mobileNavButtons.find(item=>item.dataset.target === visible.target.id);
+    if(button) setActiveMobileNav(button);
+  },{rootMargin:'-18% 0px -62% 0px',threshold:[0,.15,.35,.6]});
+  navObserver.observe(document.getElementById('editorPanel'));
+  navObserver.observe(document.getElementById('previewColumn'));
+}
+
+// Auto font sizing during print to prevent A4 overflow
+window.addEventListener('beforeprint', () => {
+  const sheet = academicSheet;
+  for(let size = 15.5; size >= 9; size -= 0.5) {
+    sheet.style.fontSize = `${size}pt`;
+    if(sheet.scrollHeight <= sheet.clientHeight) break;
+  }
+});
+
+window.addEventListener('afterprint', () => {
+  academicSheet.style.fontSize = '';
+});
+
+// Reset Function
+document.getElementById('resetBtn').addEventListener('click', () => {
+  fields.university.value = defaults.university;
+  fields.faculty.value = defaults.faculty;
+  fields.department.value = defaults.department;
+  fields.field.value = defaults.field;
+  fields.degreeType.value = defaults.degreeType;
+  document.getElementById('tdTpNumber').value = '1';
+  fields.degreeField.value = defaults.degreeField;
+  fields.specialty.value = defaults.specialty;
+  fields.title.value = defaults.title;
+  fields.year.value = defaults.year;
+  fields.supervisor.value = defaults.supervisor;
+  fields.frameStyle.value = defaults.frameStyle;
+  thesisImageData = [];
+  thesisImagesInput.value = '';
+  renderThesisImages();
+
+  document.querySelectorAll('input[name="supervisorTitle"]').forEach(r => {
+    if(r.value === defaults.supervisorTitle) {
+      r.checked = true;
+      r.closest('.radio-pill').classList.add('active');
+    } else {
+      r.closest('.radio-pill').classList.remove('active');
+    }
+  });
+
+  uploadedLogosByUniversity.clear();
+  syncUniversityLogo();
+  logoFile.value = '';
+
+  studentsContainer.innerHTML = '';
+  defaults.students.forEach(s => addStudentRow(s));
+
+  updateLivePreview();
+  showToast('تمت استعادة البيانات الافتراضية');
+});
+
+// Fit Screen preview toggle
+let isZoomed = false;
+document.getElementById('fitScreenBtn').addEventListener('click', () => {
+  isZoomed = !isZoomed;
+  if(isZoomed) {
+    academicSheet.style.maxWidth = '760px';
+    document.getElementById('fitScreenBtn').innerHTML = `<i data-lucide="minimize-2" style="width:14px;height:14px;"></i> ${tr('تصغير')}`;
+  } else {
+    academicSheet.style.maxWidth = '580px';
+    document.getElementById('fitScreenBtn').innerHTML = `<i data-lucide="maximize-2" style="width:14px;height:14px;"></i> ${tr('ملاءمة الحجم')}`;
+  }
+  lucide.createIcons();
+});
+
+// Quick Sample
+document.getElementById('quickSampleBtn').addEventListener('click', () => {
+  fields.university.value = 'جامعة هواري بومدين للعلوم والتكنولوجيا – الجزائر';
+  fields.faculty.value = 'كلية الإعلام الآلي والذكاء الاصطناعي';
+  fields.department.value = 'قسم نظم المعلومات وهندسة البرمجيات';
+  fields.field.value = 'علوم دقيقة وتكنولوجيا';
+  fields.degreeType.value = 'مذكرة مكملة لنيل شهادة الماستر أكاديمي';
+  fields.degreeField.value = 'إعلام آلي';
+  fields.specialty.value = 'هندسة البرمجيات والنظم الذكية';
+  fields.title.value = 'تصميم وتطوير نظام ذكي لتحليل الأداء الأكاديمي والتنبؤ بنجاح الطلبة باستخدام خوارزميات التعلم الآلي';
+  fields.year.value = '2024 / 2025 م';
+  fields.supervisor.value = 'أ.د. عبد القادر لعموري';
+  fields.frameStyle.value = 'frame-double';
+
+  studentsContainer.innerHTML = '';
+  addStudentRow('سفيان رحماني');
+  addStudentRow('أمين قادري');
+
+  updateLivePreview();
+  showToast('تم تحميل نموذج إعلام آلي بنجاح');
+});
+
+// Initialization
+defaults.students.forEach(s => addStudentRow(s));
+syncUniversityLogo();
+localizePage('ar');
+document.getElementById('languageSelect').addEventListener('change', event=>localizePage(event.target.value));
+updateLivePreview();
+</script>
+
+
+</body></html>
