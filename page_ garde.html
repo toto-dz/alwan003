@@ -1165,11 +1165,14 @@ html[dir="ltr"] .people-grid{text-align:left}
     padding:8px;border-radius:14px;overflow-x:hidden;
   }
   .academic-sheet {
-    width:100%;max-width:580px;min-width:0;flex:0 1 auto;
+    width:100%;height:auto;max-width:580px;min-width:0;min-height:0;flex:0 1 auto;
+    aspect-ratio:210 / 297;overflow:hidden;
     padding: 6% 6%;font-size:clamp(7px,2.2vw,12px);
   }
   .sheet-logo-container{width:68px;height:68px;margin:7px auto}
   .sheet-logo-placeholder{width:62px;height:62px}
+  .thesis-images img{height:clamp(38px,14vw,72px)}
+  .thesis-images img:only-child{height:clamp(48px,18vw,88px)}
   .academic-meta-strip{gap:8px;flex-wrap:wrap;font-size:.95em;margin:5px 0 8px;padding:4px 0}
   .thesis-section{margin:8px 0}
   .thesis-title-box{padding:8px 10px;min-height:62px}
@@ -1809,6 +1812,7 @@ const previewTargets = {
 const studentsContainer = document.getElementById('students');
 const pStudentsList = document.getElementById('pStudentsList');
 const academicSheet = document.getElementById('academicSheet');
+let coverFontScale = 100;
 const logoFile = document.getElementById('logoFile');
 const logoUploadText = document.getElementById('logoUploadText');
 const pLogoImg = document.getElementById('pLogoImg');
@@ -2085,6 +2089,21 @@ function updateLivePreview() {
   } else {
     pStudentsList.innerHTML = '<div class="people-name-item placeholder-dots">................................</div>';
   }
+  fitMobilePreviewText();
+}
+
+function fitMobilePreviewText(){
+  if(!academicSheet.isConnected || academicSheet.classList.contains('pdf-capture')) return;
+  if(!window.matchMedia('(max-width: 768px)').matches){
+    academicSheet.style.fontSize = `${coverFontScale}%`;
+    return;
+  }
+
+  const baseSize = Math.min(14, academicSheet.clientWidth * 0.022) * (coverFontScale / 100);
+  for(let size = baseSize; size >= 5; size -= 0.25){
+    academicSheet.style.fontSize = `${size}px`;
+    if(academicSheet.scrollHeight <= academicSheet.clientHeight + 1) break;
+  }
 }
 
 function escapeHtml(str) {
@@ -2282,7 +2301,6 @@ document.getElementById('topPrintBtn').addEventListener('click', triggerPdfDownl
 document.getElementById('mainPrintBtn').addEventListener('click', triggerPdfDownload);
 document.getElementById('sidePrintBtn').addEventListener('click', triggerPdfDownload);
 
-let coverFontScale = 100;
 const fontScaleMin = 80;
 const fontScaleMax = 130;
 function setCoverFontScale(scale){
@@ -2291,10 +2309,13 @@ function setCoverFontScale(scale){
   document.getElementById('fontSizeValue').textContent = `${coverFontScale}%`;
   document.getElementById('decreaseFontBtn').disabled = coverFontScale === fontScaleMin;
   document.getElementById('increaseFontBtn').disabled = coverFontScale === fontScaleMax;
+  fitMobilePreviewText();
 }
 document.getElementById('decreaseFontBtn').addEventListener('click',()=>setCoverFontScale(coverFontScale-5));
 document.getElementById('increaseFontBtn').addEventListener('click',()=>setCoverFontScale(coverFontScale+5));
 setCoverFontScale(100);
+window.addEventListener('resize',fitMobilePreviewText);
+window.addEventListener('load',fitMobilePreviewText);
 
 const mobileNavButtons = [...document.querySelectorAll('.mobile-nav-item')];
 function setActiveMobileNav(button){
