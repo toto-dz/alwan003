@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>طباعة الصور على A4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2b7a78;
+            --primary-light: #3aafa9;
+            --primary-dark: #1e5a58;
+            --bg: #f0f4f8;
+            --card: #ffffff;
+            --text: #1a2a3a;
+            --text-light: #5a6a7a;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --border: #e2e8f0;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 0 0 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            width: 100%;
+            background: rgba(255,255,255,.96);
+            color: var(--text);
+            padding: 0 16px 10px;
+            text-align: right;
+            box-shadow: 0 4px 20px rgba(15,23,42,.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-navbar-inner { display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; max-width:1100px; margin:0 auto; padding:10px 0; }
+        .site-brand { display:flex; align-items:center; gap:10px; min-width:0; color:var(--text); text-decoration:none; }
+        .site-brand img { width:46px; height:46px; flex:0 0 46px; object-fit:contain; padding:3px; border:1px solid var(--border); border-radius:12px; background:#fff; }
+        .site-brand strong { display:block; font-size:16px; line-height:1.3; white-space:nowrap; }
+        .site-brand small { display:block; color:var(--text-light); font-size:10px; letter-spacing:.5px; white-space:nowrap; }
+        .site-top-links { display:flex; order:3; flex:0 0 100%; align-items:center; gap:16px; margin:0; padding:0 2px 5px; overflow-x:auto; scrollbar-width:none; }
+        .site-top-links::-webkit-scrollbar { display:none; }
+        .site-top-links a { color:var(--text-light); text-decoration:none; font-size:12px; font-weight:700; white-space:nowrap; }
+        .site-top-links a:hover { color:#7f1d2d; }
+        .site-actions { display:flex; align-items:center; gap:8px; margin-inline-start:auto; }
+        .site-call { display:none; align-items:center; gap:6px; color:#7f1d2d; text-decoration:none; font-size:12px; font-weight:800; white-space:nowrap; }
+        .site-call svg { width:16px; height:16px; fill:currentColor; }
+        .site-login { display:inline-flex; align-items:center; justify-content:center; min-height:40px; padding:7px 12px; border-radius:999px; background:linear-gradient(135deg,#7f1d2d,#b91c1c 55%,#ea580c); color:#fff; text-decoration:none; font-size:12px; font-weight:800; white-space:nowrap; }
+        @media(min-width:640px){.site-call{display:inline-flex}}
+        @media(min-width:900px){.site-navbar-inner{flex-wrap:nowrap}.site-top-links{order:0;flex:0 1 auto;margin-inline-start:auto;padding:0;overflow:visible}.site-actions{margin-inline-start:0}}
+        @media(max-width:480px){.site-navbar-inner{gap:7px;padding:8px 0}.site-brand{gap:7px}.site-brand img{width:39px;height:39px;flex-basis:39px}.site-brand strong{font-size:12px}.site-brand small{font-size:8px}.site-login{min-height:36px;padding:6px 8px;font-size:10px}}
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .header-logo {
+            width: 48px;
+            height: 48px;
+            padding: 3px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .14);
+        }
+
+        .header-copy { text-align: right; }
+        .mode-switch { display:flex; justify-content:center; gap:7px; max-width:1100px; margin:0 auto; }
+        .mode-switch button { min-height:32px; padding:5px 12px; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--text-light); font:inherit; font-size:11px; font-weight:700; cursor:pointer; }
+        .mode-switch button.active { background:#7f1d2d; border-color:#7f1d2d; color:#fff; }
+        .app[hidden], .multi-app[hidden] { display:none !important; }
+        /* Shared navbar styling matches index.html. */
+        .topbar { position:sticky; top:0; z-index:50; width:100%; background:rgba(255,255,255,.93); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+        .topbar-inner { display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; padding:10px 16px; max-width:1100px; margin:0 auto; font-family:'Cairo',sans-serif; }
+        .brand { display:flex; align-items:center; gap:10px; min-width:0; color:inherit; text-decoration:none; }
+        .brand>img { width:46px; height:46px; object-fit:contain; border-radius:12px; background:#fff; border:1px solid var(--border); padding:3px; flex-shrink:0; }
+        .brand-name { display:block; font-weight:800; font-size:16.5px; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .brand-tag { display:block; font-size:11px; color:var(--text-light); letter-spacing:1px; }
+        .neon-logo { filter:drop-shadow(0 0 4px rgba(255,0,100,.8)) drop-shadow(0 0 9px rgba(0,200,255,.5)); animation:neonPulse 2.5s ease-in-out infinite alternate; }
+        .brand>img.neon-logo { background:transparent; border:0; border-radius:0; padding:0; }
+        @keyframes neonPulse { from { filter:drop-shadow(0 0 3px rgba(255,0,100,.5)) drop-shadow(0 0 5px rgba(0,200,255,.3)); } to { filter:drop-shadow(0 0 7px rgba(255,0,100,.9)) drop-shadow(0 0 12px rgba(0,200,255,.7)); } }
+        @media(prefers-reduced-motion:reduce){.neon-logo{animation:none}}
+        .top-links { display:flex; order:3; flex:0 0 100%; gap:20px; margin:0; padding:0 2px 5px; overflow-x:auto; scrollbar-width:none; }
+        .top-links::-webkit-scrollbar { display:none; }
+        .top-links a { font-size:14px; font-weight:700; color:var(--text-light); transition:.2s; white-space:nowrap; text-decoration:none; }
+        .top-links a:hover { color:#7f1d2d; }
+        .call-chip { display:none; align-items:center; gap:8px; background:#fff; border:1.5px solid var(--border); border-radius:999px; padding:7px 14px; font-weight:800; font-size:14px; color:#7f1d2d; transition:.25s; text-decoration:none; }
+        .call-chip svg { width:16px; height:16px; fill:currentColor; }
+        .call-chip:hover { border-color:#7f1d2d; transform:translateY(-1px); }
+        .topbar-actions { display:flex; align-items:center; gap:8px; flex-shrink:0; margin-inline-start:auto; }
+        .customer-entry { display:inline-flex; align-items:center; justify-content:center; gap:7px; white-space:nowrap; min-height:42px; padding:8px 14px; border-radius:999px; background:linear-gradient(135deg,#7f1d2d,#b91c1c 55%,#ea580c 115%); color:#fff; box-shadow:0 5px 14px rgba(127,29,45,.2); font-size:13px; font-weight:800; transition:transform .2s,box-shadow .2s; text-decoration:none; }
+        .customer-entry:hover { transform:translateY(-1px); box-shadow:0 8px 18px rgba(127,29,45,.27); }
+        @media(min-width:640px){.call-chip{display:inline-flex}}
+        @media(min-width:900px){.topbar-inner{flex-wrap:nowrap}.top-links{order:0;flex:0 1 auto;margin-inline-start:auto;padding:0;overflow:visible}}
+        @media(max-width:430px){.topbar-inner{gap:8px;padding-inline:10px}.brand{gap:7px}.brand>img{width:40px;height:40px}.brand-name{font-size:14px}.customer-entry{min-height:40px;padding:7px 10px;font-size:12px}}
+        @media(max-width:360px){.brand-tag{display:none}.customer-entry{gap:4px;padding-inline:8px;font-size:11.5px}}
+        .mode-switch-shell { display:flex; justify-content:center; padding:6px 12px 10px; background:#fff; }
+        @media print { .mode-switch-shell { display:none !important; } }
+
+        /* ===== MULTI PHOTO A4 MODE ===== */
+        .multi-app { width:100%; max-width:1280px; padding:14px; margin:0 auto; display:grid; grid-template-columns:minmax(280px,350px) minmax(0,1fr); gap:18px; align-items:start; flex:1; }
+        .multi-panel, .multi-preview { background:#fff; border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); }
+        .multi-panel { padding:16px; display:grid; gap:10px; }
+        .multi-panel h2 { font-size:16px; margin:0; }
+        .multi-hint { color:var(--text-light); font-size:11px; line-height:1.5; }
+        .multi-drop { display:grid; place-items:center; gap:5px; min-height:90px; padding:12px; border:2px dashed #9bbdbb; border-radius:12px; background:#f5fbfa; color:var(--primary-dark); text-align:center; cursor:pointer; }
+        .multi-drop strong { font-size:13px; }.multi-drop span { font-size:10px; color:var(--text-light); }
+        .multi-drop input { position:absolute; width:1px; height:1px; opacity:0; }
+        .multi-fields { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+        .multi-fields label, .multi-fit-label { display:grid; gap:4px; font-size:11px; font-weight:600; color:var(--text-light); }
+        .multi-fields select, .multi-fit-label select { width:100%; min-height:36px; padding:6px 8px; border:1px solid var(--border); border-radius:8px; background:#fff; font:inherit; font-size:11px; }
+        .multi-count { font-size:11px; color:var(--text-light); }
+        .multi-thumbs { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:5px; max-height:110px; overflow:auto; }
+        .multi-thumb { position:relative; aspect-ratio:1; overflow:hidden; border:1px solid var(--border); border-radius:7px; background:#eef2f6; }
+        .multi-thumb img { width:100%; height:100%; object-fit:cover; }
+        .multi-thumb button { position:absolute; top:2px; inset-inline-end:2px; width:19px; height:19px; border:0; border-radius:50%; background:#991b1b; color:#fff; cursor:pointer; }
+        .multi-actions { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+        .multi-actions button { min-height:40px; border:0; border-radius:9px; font:inherit; font-size:12px; font-weight:700; cursor:pointer; }
+        .multi-print { background:var(--primary-dark); color:#fff; }.multi-clear { background:#edf2f6; color:var(--text); }
+        .multi-actions button:disabled { opacity:.45; cursor:not-allowed; }
+        .multi-preview { min-width:0; padding:12px; }
+        .multi-preview-head { display:flex; justify-content:space-between; gap:8px; margin-bottom:8px; font-size:12px; font-weight:700; color:var(--text-light); }
+        .multi-paper-wrap { display:grid; place-items:center; padding:10px; border-radius:11px; background:#e8edf2; overflow:hidden; }
+        .multi-sheet { --mx:2.38%; --my:1.68%; --gx:1%; --gy:1%; position:relative; width:min(100%,650px); aspect-ratio:210/297; background:#fff; box-shadow:0 4px 18px #0f172a24; overflow:hidden; }
+        .multi-sheet.landscape { aspect-ratio:297/210; }
+        .multi-sheet-content { position:absolute; inset:var(--my) var(--mx); display:flex; flex-direction:column; gap:var(--gy); min-height:0; }
+        .multi-row { display:flex; flex:1 1 0; justify-content:center; gap:var(--gx); min-height:0; }
+        .multi-cell { flex:0 0 var(--cell-width); width:var(--cell-width); min-width:0; min-height:0; overflow:hidden; display:grid; place-items:center; }
+        .multi-cell img { display:block; width:auto !important; height:auto !important; max-width:100%; max-height:100%; min-width:0; min-height:0; object-fit:contain !important; object-position:center; }
+        .multi-empty { display:grid; place-content:center; gap:6px; width:min(75%,280px); aspect-ratio:210/297; border:1px dashed #b9c5d0; color:#8492a2; text-align:center; }
+        .multi-empty strong { font-size:14px; color:#526174; }.multi-empty span { font-size:11px; }
+        @media (max-width:900px) { .multi-app { grid-template-columns:1fr; max-width:760px; } }
+        @media (max-width:640px) {
+            .mode-switch { margin-top:8px; gap:5px; }
+            .mode-switch button { min-height:30px; padding:4px 9px; font-size:10px; }
+            .multi-app { flex:1; display:grid; grid-template-columns:1fr; grid-template-rows:minmax(0,1fr) auto; gap:5px; padding:5px 4px 0; min-height:0; overflow:auto; }
+            .multi-preview { grid-row:1; min-height:0; padding:6px; overflow:hidden; }
+            .multi-panel { grid-row:2; padding:8px; gap:7px; }
+            .multi-sheet { width:min(100%,440px); }
+            .multi-thumbs { grid-template-columns:repeat(7,minmax(0,1fr)); max-height:64px; }
+            .multi-drop { min-height:66px; }
+        }
+
+        .header h1 span {
+            font-weight: 300;
+            opacity: 0.85;
+        }
+
+        .header p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 4px;
+            font-weight: 300;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .app {
+            width: 100%;
+            max-width: 1280px;
+            padding: 14px 14px 0;
+            display: grid;
+            grid-template-columns: 340px minmax(0, 1fr);
+            gap: 20px;
+            align-items: start;
+            flex: 1;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 18px 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: box-shadow 0.2s;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title i {
+            font-size: 16px;
+        }
+
+        /* ===== GRID CONTROLS ===== */
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 14px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .control-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .control-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-light);
+            letter-spacing: 0.2px;
+        }
+
+        .control-group select,
+        .control-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+            background: #fafcfe;
+            color: var(--text);
+            transition: border 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .control-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a6a7a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 12px center;
+            padding-left: 34px;
+        }
+
+        .control-group select:focus,
+        .control-group input:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(58, 175, 169, 0.15);
+            outline: none;
+            background: #fff;
+        }
+
+        .control-group input[readonly] {
+            background: #f1f4f8;
+            color: var(--text-light);
+            cursor: default;
+        }
+
+        .control-group input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .control-group input[type="number"]::-webkit-outer-spin-button,
+        .control-group input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .controls-card::-webkit-scrollbar {
+            width: 4px;
+        }
+        .controls-card::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .controls-card::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .controls-card {
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 transparent;
+        }
+
+        /* ===== UPLOAD AREA ===== */
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            border-radius: 14px;
+            padding: 18px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: border 0.25s, background 0.25s;
+            background: #f9fbfd;
+            position: relative;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-light);
+            background: #f4faf9;
+        }
+
+        .upload-area input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-area .icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .upload-area .text {
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--text);
+        }
+
+        .upload-area .sub {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        .upload-area .file-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--primary);
+            margin-top: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        /* ===== BUTTONS ===== */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .actions button {
+            flex: 1;
+            min-width: 80px;
+            padding: 13px 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            touch-action: manipulation;
+            background: var(--border);
+            color: var(--text);
+        }
+
+        .actions button:active {
+            transform: scale(0.97);
+        }
+
+        .btn-primary {
+            background: var(--primary) !important;
+            color: white !important;
+            box-shadow: 0 4px 14px rgba(43, 122, 120, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark) !important;
+            box-shadow: 0 6px 20px rgba(43, 122, 120, 0.35);
+        }
+
+        .btn-success {
+            background: #2d8f6f !important;
+            color: white !important;
+            box-shadow: 0 4px 14px rgba(45, 143, 111, 0.3);
+        }
+
+        .btn-success:hover {
+            background: #21755a !important;
+        }
+
+        .btn-danger {
+            background: #e2e8f0 !important;
+            color: #4a5a6a !important;
+        }
+
+        .btn-danger:hover {
+            background: #d0d8e2 !important;
+        }
+
+        /* ===== INFO ===== */
+        .info-box {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+            border-right: 4px solid var(--primary-light);
+            margin-top: 2px;
+        }
+
+        .info-box strong {
+            color: var(--text);
+        }
+
+        .capacity-note {
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--primary-dark);
+            font-weight: 500;
+        }
+
+        /* ===== PREVIEW ===== */
+        .preview-wrap {
+            background: #e8edf4;
+            border-radius: var(--radius);
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .preview-wrap .preview-label {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2px 12px;
+            border-radius: 30px;
+            backdrop-filter: blur(4px);
+            z-index: 5;
+        }
+
+        .sheet {
+            width: 210mm;
+            height: 297mm;
+            background: #ffffff;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+            border-radius: 3px;
+            display: grid;
+            align-content: start;
+            justify-content: start;
+            gap: 3mm;
+            border: none;
+            outline: 1px solid #d0d8e2;
+            overflow: hidden;
+            flex-shrink: 0;
+            transition: width 0.2s, height 0.2s;
+        }
+
+        .sheet.landscape {
+            width: 297mm;
+            height: 210mm;
+        }
+
+        @media screen {
+            .sheet {
+                position: relative;
+                left: 0;
+            }
+        }
+
+        .photo {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-width: 0;
+            min-height: 0;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border: 1px solid #d0d8e2;
+            border-radius: 3px;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 40px 20px;
+            color: var(--text-light);
+            font-size: 16px;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            min-height: 200px;
+        }
+
+        .empty-state .big-icon {
+            font-size: 48px;
+            opacity: 0.5;
+        }
+
+        .empty-state .sub-text {
+            font-size: 13px;
+            opacity: 0.6;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            width: 100%;
+            max-width: 1280px;
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            border-radius: 16px 16px 0 0;
+            padding: 12px 18px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== RESPONSIVE - PHOTOSHOP STYLE SIDEBAR ===== */
+        @media (max-width: 900px) {
+            .app {
+                grid-template-columns: 1fr;
+                max-width: 760px;
+            }
+            .footer {
+                max-width: 760px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header { padding: 10px 12px; }
+            .header-logo { width: 40px; height: 40px; border-radius: 10px; }
+            .header-brand { gap: 9px; }
+            .header-copy h1 { font-size: 17px; }
+            .header-copy p { font-size: 11px; }
+            body {
+                display: flex;
+                flex-direction: column;
+                height: 100dvh;
+            }
+
+            body {
+                display: flex;
+                flex-direction: column;
+                height: 100dvh;
+            }
+
+            .app {
+                flex: 1;
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr auto;
+                gap: 6px;
+                padding: 6px 4px 0;
+                max-width: 100%;
+                min-height: 0;
+                overflow: hidden;
+            }
+
+            .preview-card {
+                grid-column: 1;
+                grid-row: 1;
+                padding: 0;
+                overflow: hidden;
+                border-radius: 12px;
+                border: 1px solid var(--border);
+                min-height: 0;
+                min-width: 0;
+            }
+
+            .controls-card {
+                grid-column: 1;
+                grid-row: 2;
+                width: 100%;
+                padding: 6px;
+                border-radius: 12px;
+                background: var(--card);
+                box-shadow: var(--shadow);
+                border: 1px solid var(--border);
+                position: static;
+                align-self: start;
+                min-height: 0;
+                max-height: 42vh;
+                overflow-y: auto;
+            }
+
+            /* Hide card titles on mobile sidebar */
+            .controls-card .card-title {
+                font-size: 10px;
+                margin-bottom: 4px;
+                justify-content: center;
+                text-align: center;
+                display: flex;
+            }
+
+            .controls-card .card-title i {
+                font-size: 12px;
+            }
+
+            .controls-card .upload-area {
+                padding: 8px;
+                border-radius: 10px;
+                border: 2px solid var(--primary-light);
+                background: linear-gradient(135deg, #f0f9f8 0%, #e8f5f4 100%);
+                transition: all 0.2s;
+            }
+            .controls-card .upload-area:active {
+                background: linear-gradient(135deg, #e0f0ef 0%, #d8eae7 100%);
+                transform: scale(0.98);
+            }
+            .controls-card .upload-area .icon {
+                font-size: 24px;
+                margin-bottom: 2px;
+            }
+            .controls-card .upload-area .text {
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--primary);
+            }
+            .controls-card .upload-area .sub {
+                font-size: 10px;
+                color: var(--text-light);
+            }
+            .controls-card .upload-area .file-name {
+                font-size: 10px;
+                color: var(--primary-dark);
+                margin-top: 2px;
+                font-weight: 500;
+            }
+
+            .controls-card .controls-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 4px 5px;
+                margin-top: 5px !important;
+            }
+
+            .controls-card .control-group label {
+                font-size: 9px;
+                letter-spacing: 0.2px;
+                text-align: right;
+            }
+
+            .controls-card .control-group select,
+            .controls-card .control-group input {
+                padding: 6px 6px;
+                font-size: 11px;
+                border-radius: 6px;
+                text-align: right;
+            }
+
+            .controls-card .control-group select {
+                padding-left: 24px;
+                background-position: left 6px center;
+                background-size: 9px;
+            }
+
+            .controls-card .control-group.full {
+                grid-column: 1;
+            }
+
+            .controls-card .control-group.full label {
+                font-size: 9px;
+            }
+
+            .controls-card .actions {
+                flex-direction: row;
+                gap: 4px;
+                margin-top: 5px !important;
+            }
+
+            .controls-card .actions button {
+                font-size: 10px;
+                padding: 6px 6px;
+                min-width: auto;
+                border-radius: 6px;
+                gap: 3px;
+            }
+
+            .controls-card .actions button span {
+                font-size: 11px;
+            }
+
+            .controls-card .info-box {
+                font-size: 9px;
+                padding: 5px 6px;
+                border-radius: 6px;
+                margin-top: 5px !important;
+                line-height: 1.4;
+            }
+
+            .controls-card .info-box strong {
+                font-size: 9px;
+            }
+
+            .controls-card .capacity-note {
+                font-size: 9px;
+                margin-top: 3px;
+            }
+
+            /* Preview */
+            .preview-card .preview-wrap {
+                padding: 8px;
+                min-height: 0;
+                border-radius: 12px;
+                background: #e8edf4;
+            }
+
+            .preview-card .preview-label {
+                font-size: 9px;
+                top: 5px;
+                right: 8px;
+                padding: 1px 8px;
+            }
+
+            .preview-card .sheet {
+                border-radius: 3px;
+            }
+
+            .footer {
+                max-width: 100%;
+                border-radius: 14px 14px 0 0;
+                font-size: 12px;
+                padding: 10px 14px;
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 420px) {
+            body {
+                display: flex;
+                flex-direction: column;
+                height: 100dvh;
+            }
+
+            .app {
+                flex: 1;
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr auto;
+                gap: 4px;
+                padding: 4px 3px 0;
+                min-height: 0;
+                overflow: hidden;
+            }
+
+            .preview-card {
+                grid-column: 1;
+                grid-row: 1;
+                padding: 0;
+                overflow: hidden;
+                border-radius: 12px;
+                border: 1px solid var(--border);
+                min-height: 0;
+                min-width: 0;
+            }
+
+            .controls-card {
+                grid-column: 1;
+                grid-row: 2;
+                width: 100%;
+                padding: 5px 4px;
+                border-radius: 12px;
+                background: var(--card);
+                box-shadow: var(--shadow);
+                border: 1px solid var(--border);
+                position: static;
+                align-self: start;
+                min-height: 0;
+                max-height: 36vh;
+                overflow-y: auto;
+            }
+
+            .controls-card .upload-area {
+                padding: 6px;
+                border-radius: 8px;
+                border: 2px solid var(--primary-light);
+                background: linear-gradient(135deg, #f0f9f8 0%, #e8f5f4 100%);
+                transition: all 0.2s;
+            }
+            .controls-card .upload-area:active {
+                background: linear-gradient(135deg, #e0f0ef 0%, #d8eae7 100%);
+                transform: scale(0.98);
+            }
+            .controls-card .upload-area .icon {
+                font-size: 20px;
+                margin-bottom: 2px;
+            }
+            .controls-card .upload-area .text {
+                font-size: 12px;
+                font-weight: 600;
+                color: var(--primary);
+            }
+            .controls-card .upload-area .sub {
+                font-size: 9px;
+                color: var(--text-light);
+            }
+            .controls-card .upload-area .file-name {
+                font-size: 9px;
+                color: var(--primary-dark);
+                margin-top: 2px;
+                font-weight: 500;
+            }
+
+            .controls-card .controls-grid {
+                gap: 3px 4px;
+                margin-top: 4px !important;
+            }
+            .controls-card .control-group label {
+                font-size: 8px;
+            }
+            .controls-card .control-group select,
+            .controls-card .control-group input {
+                padding: 5px 5px;
+                font-size: 9px;
+                border-radius: 5px;
+            }
+            .controls-card .control-group select {
+                padding-left: 20px;
+                background-position: left 5px center;
+                background-size: 7px;
+            }
+
+            .controls-card .actions button {
+                font-size: 8px;
+                padding: 5px 5px;
+                border-radius: 5px;
+            }
+            .controls-card .actions button span {
+                font-size: 9px;
+            }
+
+            .controls-card .info-box {
+                font-size: 8px;
+                padding: 4px 5px;
+                border-radius: 5px;
+                margin-top: 3px !important;
+            }
+            .controls-card .info-box strong {
+                font-size: 8px;
+            }
+            .controls-card .capacity-note {
+                font-size: 8px;
+            }
+
+            .preview-card .preview-wrap {
+                min-height: 0;
+                padding: 5px;
+            }
+            .preview-card .preview-label {
+                font-size: 8px;
+                top: 4px;
+                right: 6px;
+                padding: 1px 6px;
+            }
+
+            .footer {
+                max-width: 100%;
+                border-radius: 14px 14px 0 0;
+                font-size: 11px;
+                padding: 8px 10px;
+                margin-top: 0;
+            }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            body {
+                background: white !important;
+                padding: 0 !important;
+            }
+            .header,
+            .card,
+            .actions,
+            .info-box,
+            .preview-label,
+            .footer {
+                display: none !important;
+            }
+            .app {
+                padding: 0 !important;
+                max-width: 100% !important;
+                display: block !important;
+            }
+            .preview-wrap {
+                background: white !important;
+                padding: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                min-height: auto !important;
+                overflow: visible !important;
+                display: block !important;
+            }
+            .sheet {
+                box-shadow: none !important;
+                margin: 0 auto !important;
+                border: 1px solid #ccc !important;
+                border-radius: 0 !important;
+                transform: none !important;
+                left: 0 !important;
+                position: relative !important;
+                width: 210mm !important;
+                height: 297mm !important;
+            }
+            .sheet.landscape {
+                width: 297mm !important;
+                height: 210mm !important;
+            }
+            .photo {
+                border: 1px solid #aaa !important;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+        }
+
+        @media print {
+            body.multi-mode { display:block !important; width:210mm !important; height:297mm !important; min-height:0 !important; }
+            body.multi-mode .app { display:none !important; }
+            body.multi-mode .multi-app { display:block !important; width:210mm !important; height:297mm !important; max-width:none !important; margin:0 !important; padding:0 !important; }
+            body.multi-mode .multi-panel, body.multi-mode .multi-preview-head { display:none !important; }
+            body.multi-mode .multi-preview { display:block !important; width:210mm !important; height:297mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; }
+            body.multi-mode .multi-paper-wrap { display:block !important; width:210mm !important; height:297mm !important; padding:0 !important; border-radius:0 !important; overflow:visible !important; background:#fff !important; }
+            body.multi-mode .multi-sheet { width:210mm !important; height:297mm !important; max-width:none !important; aspect-ratio:auto !important; box-shadow:none !important; }
+            body.multi-mode.multi-landscape, body.multi-mode.multi-landscape .multi-app, body.multi-mode.multi-landscape .multi-preview, body.multi-mode.multi-landscape .multi-paper-wrap { width:297mm !important; height:210mm !important; }
+            body.multi-mode.multi-landscape .multi-sheet { width:297mm !important; height:210mm !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a href="./index.html#home" class="brand"><img class="neon-logo" src="./alwan.png" alt="شعار ألوان للطباعة والتصميم"><span><strong class="brand-name">ألوان للطباعة والتصميم</strong><small class="brand-tag">COLORS • طباعة • تصميم • إبداع</small></span></a>
+            <nav class="top-links" aria-label="التنقل الرئيسي"><a href="./index.html#services">الخدمات</a><a href="./services-tools.html">خدمات ألوان</a><a href="./index.html#how">كيف نعمل</a><a href="./index.html#news">المستجدات</a><a href="./index.html#contact">تواصل معنا</a></nav>
+            <div class="topbar-actions">
+                <a class="call-chip" href="tel:+213655728658"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02z"/></svg><span dir="ltr">06.55.72.86.58</span></a>
+                <a class="customer-entry" href="https://toto-dz.github.io/send_alwan/" aria-label="دخول المستخدم لمتابعة طلبات الطباعة">👤 دخول المستخدم</a>
+            </div>
+        </div>
+    </header>
+    <div class="mode-switch-shell">
+        <nav class="mode-switch" aria-label="نوع ترتيب الصور">
+            <button type="button" id="singleModeBtn" class="active" aria-pressed="true">نسخ من صورة واحدة</button>
+            <button type="button" id="multiModeBtn" aria-pressed="false">صور مختلفة على A4</button>
+        </nav>
+    </div>
+
+    <!-- MAIN -->
+    <main class="app" id="singleApp">
+
+        <!-- CARD: Controls - Left Sidebar (Photoshop style) -->
+        <section class="card controls-card">
+            <div class="card-title">⚙️ إعدادات</div>
+
+            <!-- Upload -->
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="fileInput" accept="image/*">
+                <span class="icon">📷</span>
+                <div class="text">اختر صورة</div>
+                <div class="sub">من جهازك</div>
+                <div class="file-name" id="fileNameDisplay">لم يتم اختيار</div>
+            </div>
+
+            <!-- Controls Grid -->
+            <div class="controls-grid" style="margin-top:14px;">
+                <div class="control-group">
+                    <label for="copiesInput">🔢 العدد</label>
+                    <input type="number" id="copiesInput" min="1" max="40" placeholder="1">
+                </div>
+                <div class="control-group">
+                    <label for="copyOrientationSelect">↕️ اتجاه</label>
+                    <select id="copyOrientationSelect">
+                        <option value="portrait">عمودي</option>
+                        <option value="landscape">أفقي</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="marginSelect">📏 الهامش</label>
+                    <select id="marginSelect">
+                        <option value="5">0.5 سم</option>
+                        <option value="10" selected>1 سم</option>
+                        <option value="15">1.5 سم</option>
+                        <option value="20">2 سم</option>
+                        <option value="25">2.5 سم</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="orientationSelect">↔️ اتجاه الورقة</label>
+                    <select id="orientationSelect">
+                        <option value="portrait">عمودي</option>
+                        <option value="landscape">أفقي</option>
+                    </select>
+                </div>
+                <div class="control-group full">
+                    <label>📐 حجم الصورة</label>
+                    <input id="sizeDisplay" type="text" value="يُحسب تلقائياً" readonly>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions" style="margin-top:14px;">
+                <button id="downloadBtn" class="btn-success"><span>⬇️</span> تحميل</button>
+                <button id="printBtn" class="btn-primary"><span>🖨️</span> طباعة</button>
+                <button id="clearBtn" class="btn-danger"><span>🗑️</span> مسح</button>
+            </div>
+
+            <!-- Info -->
+            <div class="info-box" style="margin-top:14px;">
+                <div class="capacity-note" id="capacityNote"></div>
+            </div>
+        </section>
+
+        <!-- CARD: Preview -->
+        <section class="card preview-card" style="padding:0; overflow:hidden; border:1px solid var(--border);">
+            <div class="preview-wrap" id="previewWrap">
+                <span class="preview-label">📄 معاينة</span>
+                <div class="sheet" id="sheet">
+                    <div class="empty-state">
+                        <span class="big-icon">🖼️</span>
+                        <span>اختر صورة للبدء</span>
+                        <span class="sub-text">ستظهر هنا معاينة للصفحة</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <main class="multi-app" id="multiApp" hidden>
+        <section class="multi-panel" aria-label="إعدادات تجميع الصور">
+            <h2>تجميع عدة صور على A4</h2>
+            <p class="multi-hint">ترتيب تلقائي يستغل مساحة الورقة. تبقى الصور على جهازك ولا تُرفع إلى الموقع.</p>
+            <label class="multi-drop" id="multiDropzone"><strong>＋ اختر عدة صور</strong><span>أو اسحب الصور وأفلتها هنا</span><span>JPEG، PNG، WebP</span><input id="multiFiles" type="file" accept="image/*" multiple></label>
+            <div class="multi-count" id="multiCount">لم تُضف صور بعد</div>
+            <div class="multi-thumbs" id="multiThumbs"></div>
+            <div class="multi-fields">
+                <label>اتجاه الورقة<select id="multiOrientation"><option value="portrait">عمودي</option><option value="landscape">أفقي</option></select></label>
+                <label>الأعمدة<select id="multiColumns"><option value="auto">تلقائي</option><option value="1">عمود واحد</option><option value="2">عمودان</option><option value="3">3 أعمدة</option><option value="4">4 أعمدة</option></select></label>
+                <label>هوامش الورقة<select id="multiMargin"><option value="3">ضيقة — 3 مم</option><option value="5" selected>متوسطة — 5 مم</option><option value="8">واسعة — 8 مم</option><option value="0">بدون هامش</option></select></label>
+                <label>المسافة بين الصور<select id="multiGap"><option value="0">بدون مسافة</option><option value="2" selected>2 مم</option><option value="4">4 مم</option><option value="6">6 مم</option></select></label>
+            </div>
+            <div class="multi-fit-label">ملاءمة الصور: <strong>إظهار الصورة كاملة دون قص</strong></div>
+            <div class="multi-actions"><button class="multi-print" id="multiPrintBtn" disabled>🖨️ طباعة / حفظ PDF</button><button class="multi-clear" id="multiClearBtn" disabled>مسح الصور</button></div>
+        </section>
+        <section class="multi-preview" aria-label="معاينة ورقة A4">
+            <div class="multi-preview-head"><span>معاينة الورقة</span><span id="multiPaperLabel">A4 عمودي</span></div>
+            <div class="multi-paper-wrap"><div class="multi-sheet" id="multiSheet"><div class="multi-empty"><strong>ورقة A4 جاهزة</strong><span>أضف الصور لعرض الترتيب</span></div></div></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>🖨️ أداة طباعة الصور على ورق A4</span>
+        <span>•</span>
+        <span>مجانية • بدون تحميل • محلية بالكامل</span>
+    </footer>
+
+    <script>
+        (function() {
+            // ===== DOM refs =====
+            const fileInput = document.getElementById('fileInput');
+            const fileNameDisplay = document.getElementById('fileNameDisplay');
+            const copiesInput = document.getElementById('copiesInput');
+            const copyOrientationSelect = document.getElementById('copyOrientationSelect');
+            const marginSelect = document.getElementById('marginSelect');
+            const orientationSelect = document.getElementById('orientationSelect');
+            const sizeDisplay = document.getElementById('sizeDisplay');
+            const sheet = document.getElementById('sheet');
+            const capacityNote = document.getElementById('capacityNote');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const printBtn = document.getElementById('printBtn');
+            const clearBtn = document.getElementById('clearBtn');
+
+            let imageURL = '';
+            let currentImage = null;
+            let currentLayout = null;
+            let currentMarginMm = 10;
+
+            const A4 = {
+                portrait: { width: 210, height: 297 },
+                landscape: { width: 297, height: 210 }
+            };
+            const GAP_MM = 0;
+            const MAX_COPIES = 40;
+
+            // ===== Print style =====
+            const printStyle = document.createElement('style');
+            printStyle.id = 'print-page-style';
+            document.head.appendChild(printStyle);
+
+            // ===== Helpers =====
+            function getPageSize() {
+                return A4[orientationSelect.value] || A4.portrait;
+            }
+
+            function sanitizeCopies() {
+                const raw = copiesInput.value.trim();
+                let val = raw === '' ? 1 : parseInt(raw, 10);
+                if (!Number.isFinite(val) || val < 1) val = 1;
+                if (val > MAX_COPIES) val = MAX_COPIES;
+                return val;
+            }
+
+            function fitSheetToScreen() {
+                if (window.matchMedia('print').matches) return;
+                const wrap = document.getElementById('previewWrap');
+                if (!wrap) return;
+
+                const wrapStyle = getComputedStyle(wrap);
+                const padX = parseFloat(wrapStyle.paddingLeft) + parseFloat(wrapStyle.paddingRight);
+                const padY = parseFloat(wrapStyle.paddingTop) + parseFloat(wrapStyle.paddingBottom);
+
+                const availW = Math.max(160, wrap.clientWidth - padX - 6);
+                const availH = Math.max(160, wrap.clientHeight || window.innerHeight * 0.45, window.innerHeight - 280);
+
+                const page = getPageSize();
+                const mmToPx = 96 / 25.4;
+                const sheetW = page.width * mmToPx;
+                const sheetH = page.height * mmToPx;
+
+                let scale = Math.min(0.7, availW / sheetW, availH / sheetH);
+
+                // mobile max scale
+                if (window.innerWidth <= 600) scale = Math.min(scale, 0.48);
+                if (window.innerWidth <= 420) scale = Math.min(scale, 0.38);
+
+                const safeScale = Number.isFinite(scale) && scale > 0.01 ? scale : 0.35;
+
+                sheet.style.width = (page.width * safeScale) + 'mm';
+                sheet.style.height = (page.height * safeScale) + 'mm';
+                sheet.style.padding = (currentMarginMm * safeScale) + 'mm';
+                sheet.style.transform = 'none';
+                sheet.style.left = '0';
+                sheet.style.marginBottom = '0';
+
+                if (currentLayout && currentLayout.columns > 0 && currentLayout.rows > 0) {
+                    sheet.style.gap = (GAP_MM * safeScale) + 'mm';
+                    sheet.style.gridTemplateColumns = `repeat(${currentLayout.columns}, ${(currentLayout.cellWidthMm * safeScale)}mm)`;
+                    sheet.style.gridTemplateRows = `repeat(${currentLayout.rows}, ${(currentLayout.cellHeightMm * safeScale)}mm)`;
+                }
+            }
+
+            function updateOrientation() {
+                const isLandscape = orientationSelect.value === 'landscape';
+                const page = getPageSize();
+                sheet.classList.toggle('landscape', isLandscape);
+                sheet.style.width = page.width + 'mm';
+                sheet.style.height = page.height + 'mm';
+
+                printStyle.textContent = `@media print { @page { size: A4 ${isLandscape ? 'landscape' : 'portrait'}; margin: 0; } }`;
+
+                if (window.matchMedia('print').matches) {
+                    sheet.style.transform = 'none';
+                    sheet.style.left = '0';
+                    sheet.style.marginBottom = '0';
+                    sheet.style.padding = currentMarginMm + 'mm';
+                    sheet.style.gap = GAP_MM + 'mm';
+                    if (currentLayout && currentLayout.columns > 0 && currentLayout.rows > 0) {
+                        sheet.style.gridTemplateColumns = `repeat(${currentLayout.columns}, ${currentLayout.cellWidthMm}mm)`;
+                        sheet.style.gridTemplateRows = `repeat(${currentLayout.rows}, ${currentLayout.cellHeightMm}mm)`;
+                    } else {
+                        sheet.style.gridTemplateColumns = '';
+                        sheet.style.gridTemplateRows = '';
+                    }
+                } else {
+                    requestAnimationFrame(fitSheetToScreen);
+                }
+            }
+
+            function calculateLayout(marginMm, requestedCount) {
+                const page = getPageSize();
+                const availW = Math.max(0, page.width - marginMm * 2);
+                const availH = Math.max(0, page.height - marginMm * 2);
+                const pageRatio = availW / availH;
+                const wantedLandscape = copyOrientationSelect.value === 'landscape';
+
+                let allowedSlots = new Set([requestedCount]);
+                if (requestedCount > 1 && requestedCount % 2 === 1) {
+                    allowedSlots.add(requestedCount + 1);
+                }
+
+                let best = {
+                    columns: 1,
+                    rows: requestedCount,
+                    slots: requestedCount,
+                    cellW: availW,
+                    cellH: availH,
+                    score: Infinity
+                };
+
+                allowedSlots.forEach(slots => {
+                    for (let cols = 1; cols <= slots; cols++) {
+                        if (slots % cols !== 0) continue;
+                        const rows = slots / cols;
+                        const cw = (availW - (cols - 1) * GAP_MM) / cols;
+                        const ch = (availH - (rows - 1) * GAP_MM) / rows;
+                        if (cw <= 0 || ch <= 0) continue;
+
+                        const gridRatio = cols / rows;
+                        const cellRatio = pageRatio / gridRatio;
+                        const emptySlots = slots - requestedCount;
+                        const dirPenalty = wantedLandscape ? (cellRatio < 1 ? 100 : 0) : (cellRatio > 1 ? 100 : 0);
+                        const shapeScore = wantedLandscape ? Math.abs(cellRatio - 1.45) : Math.abs(cellRatio - 0.7);
+                        const score = dirPenalty + shapeScore + emptySlots * 0.05;
+
+                        if (score < best.score) {
+                            best = { columns: cols, rows, slots, cellW: cw, cellH: ch, score };
+                        }
+                    }
+                });
+
+                return {
+                    columns: best.columns,
+                    rows: best.rows,
+                    slots: best.slots,
+                    cellWidthMm: best.cellW,
+                    cellHeightMm: best.cellH,
+                    availableWidthMm: availW,
+                    availableHeightMm: availH
+                };
+            }
+
+            function resetSheetGrid() {
+                sheet.style.gridTemplateColumns = '';
+                sheet.style.gridTemplateRows = '';
+                sheet.style.gap = GAP_MM + 'mm';
+            }
+
+            // ===== RENDER =====
+            function render() {
+                sheet.innerHTML = '';
+                updateOrientation();
+                resetSheetGrid();
+                const marginMm = parseInt(marginSelect.value, 10) || 10;
+                sheet.style.padding = marginMm + 'mm';
+
+                if (!imageURL) {
+                    sheet.innerHTML = `
+                        <div class="empty-state">
+                            <span class="big-icon">🖼️</span>
+                            <span>اختر صورة للبدء</span>
+                            <span class="sub-text">ستظهر هنا معاينة للصفحة</span>
+                        </div>
+                    `;
+                    capacityNote.textContent = '';
+                    sizeDisplay.value = 'يُحسب تلقائياً';
+                    currentLayout = null;
+                    fitSheetToScreen();
+                    return;
+                }
+                const requestedCount = sanitizeCopies();
+                const layout = calculateLayout(marginMm, requestedCount);
+                const count = requestedCount;
+                currentLayout = layout;
+                currentMarginMm = marginMm;
+
+                sheet.style.gridTemplateColumns = layout.columns > 0 ? `repeat(${layout.columns}, ${layout.cellWidthMm}mm)` :
+                'none';
+                sheet.style.gridTemplateRows = layout.rows > 0 ? `repeat(${layout.rows}, ${layout.cellHeightMm}mm)` : 'none';
+                sheet.style.gap = GAP_MM + 'mm';
+
+                if (layout.columns <= 0 || layout.rows <= 0) {
+                    sheet.innerHTML = `<div class="empty-state"><span>⚠️</span><span>لا توجد مساحة كافية</span><span class="sub-text">قلل الهامش أو عدد النسخ</span></div>`;
+                    capacityNote.textContent = `0 نسخ — لا توجد مساحة كافية`;
+                    currentLayout = null;
+                    fitSheetToScreen();
+                    return;
+                }
+                const emptySlots = (layout.columns * layout.rows) - count;
+                const wCm = layout.cellWidthMm / 10;
+                const hCm = layout.cellHeightMm / 10;
+                sizeDisplay.value = `${wCm.toFixed(2)} × ${hCm.toFixed(2)} سم`;
+
+                const orientText = copyOrientationSelect.value === 'landscape' ? 'عرضية' : 'عمودية';
+                capacityNote.textContent =
+                    `${count} نسخ — ${layout.columns} أعمدة × ${layout.rows} صفوف — ${orientText} — حجم الصورة ${wCm.toFixed(2)} × ${hCm.toFixed(2)} سم${emptySlots ? ' — توجد خانة فارغة' : ''}`;
+
+                for (let i = 0; i < count; i++) {
+                    const img = document.createElement('img');
+                    img.className = 'photo';
+                    img.src = imageURL;
+                    img.alt = 'صورة للطباعة';
+                    sheet.appendChild(img);
+                }
+
+                requestAnimationFrame(() => {
+                    fitSheetToScreen();
+                });
+            }
+
+            // ===== LOAD IMAGE =====
+            function loadImage(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.onerror = reject;
+                    img.src = url;
+                });
+            }
+
+            // ===== DOWNLOAD =====
+            async function downloadSheet() {
+                if (!imageURL) {
+                    alert('يرجى اختيار صورة أولاً.');
+                    return;
+                }
+
+                const page = getPageSize();
+                const marginMm = parseInt(marginSelect.value, 10) || 10;
+                const requestedCount = sanitizeCopies();
+                const layout = calculateLayout(marginMm, requestedCount);
+                const image = await loadImage(imageURL);
+
+                const dpi = 300;
+                const pxPerMm = dpi / 25.4;
+                const canvas = document.createElement('canvas');
+                const wPx = Math.round(page.width * pxPerMm);
+                const hPx = Math.round(page.height * pxPerMm);
+                canvas.width = wPx;
+                canvas.height = hPx;
+
+                const ctx = canvas.getContext('2d');
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, wPx, hPx);
+
+                const contentW = (page.width - marginMm * 2) * pxPerMm;
+                const contentH = (page.height - marginMm * 2) * pxPerMm;
+                const startX = marginMm * pxPerMm;
+                const startY = marginMm * pxPerMm;
+                const cellW = contentW / layout.columns;
+                const cellH = contentH / layout.rows;
+
+                for (let i = 0; i < requestedCount; i++) {
+                    const col = i % layout.columns;
+                    const row = Math.floor(i / layout.columns);
+                    const tx = startX + col * cellW;
+                    const ty = startY + row * cellH;
+
+                    const scale = Math.min(cellW / image.width, cellH / image.height);
+                    const dw = image.width * scale;
+                    const dh = image.height * scale;
+                    ctx.drawImage(image, tx + (cellW - dw) / 2, ty + (cellH - dh) / 2, dw, dh);
+                }
+
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'a4-print.png';
+                link.click();
+            }
+
+            // ===== EVENTS =====
+            fileInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (!file) return;
+                if (imageURL) URL.revokeObjectURL(imageURL);
+                imageURL = URL.createObjectURL(file);
+                fileNameDisplay.textContent = file.name;
+                render();
+            });
+
+            [copiesInput, copyOrientationSelect, marginSelect, orientationSelect].forEach(el => {
+                el.addEventListener('input', render);
+                el.addEventListener('change', render);
+            });
+
+            window.addEventListener('resize', fitSheetToScreen);
+            window.addEventListener('beforeprint', updateOrientation);
+            window.addEventListener('afterprint', fitSheetToScreen);
+
+            downloadBtn.addEventListener('click', downloadSheet);
+            printBtn.addEventListener('click', () => window.print());
+
+            clearBtn.addEventListener('click', function() {
+                if (imageURL) URL.revokeObjectURL(imageURL);
+                imageURL = '';
+                fileInput.value = '';
+                fileNameDisplay.textContent = 'لم يتم اختيار';
+                render();
+            });
+
+            // ===== INIT =====
+            marginSelect.value = '10';
+            render();
+
+            // extra fit after fonts load
+            setTimeout(fitSheetToScreen, 300);
+        })();
+    </script>
+
+    <script>
+      (()=>{
+        const singleApp=document.getElementById('singleApp'),multiApp=document.getElementById('multiApp');
+        const singleBtn=document.getElementById('singleModeBtn'),multiBtn=document.getElementById('multiModeBtn');
+        function setMode(multiple,updateUrl=true){
+          document.body.classList.toggle('multi-mode',multiple);
+          singleApp.hidden=multiple;multiApp.hidden=!multiple;
+          singleBtn.classList.toggle('active',!multiple);multiBtn.classList.toggle('active',multiple);
+          singleBtn.setAttribute('aria-pressed',String(!multiple));multiBtn.setAttribute('aria-pressed',String(multiple));
+          if(updateUrl){const url=new URL(location.href);if(multiple)url.searchParams.set('mode','multiple');else url.searchParams.delete('mode');history.replaceState({},'',url)}
+          if(multiple)renderMulti();
+        }
+        singleBtn.addEventListener('click',()=>setMode(false));multiBtn.addEventListener('click',()=>setMode(true));
+
+        const fileInput=document.getElementById('multiFiles'),thumbs=document.getElementById('multiThumbs'),sheet=document.getElementById('multiSheet');
+        const count=document.getElementById('multiCount'),printBtn=document.getElementById('multiPrintBtn'),clearBtn=document.getElementById('multiClearBtn');
+        const orientation=document.getElementById('multiOrientation'),columns=document.getElementById('multiColumns'),margin=document.getElementById('multiMargin'),gap=document.getElementById('multiGap');
+        const printRule=document.createElement('style');document.head.appendChild(printRule);
+        let photos=[];
+        const aspect=photo=>photo.width/photo.height;
+        function addFiles(files){
+          for(const file of [...files].filter(item=>item.type.startsWith('image/'))){
+            const url=URL.createObjectURL(file),photo={url,width:1,height:1};
+            const image=new Image();image.onload=()=>{photo.width=image.naturalWidth;photo.height=image.naturalHeight;renderMulti()};image.src=url;photos.push(photo);
+          }
+          renderMulti();
+        }
+        function autoColumns(){
+          const n=photos.length;if(n<2)return 1;
+          const landscape=orientation.value==='landscape',pageW=landscape?297:210,pageH=landscape?210:297;
+          const m=Number(margin.value),g=Number(gap.value),availW=pageW-2*m,availH=pageH-2*m;
+          let best=1,bestScore=Infinity;
+          for(let cols=1;cols<=Math.min(6,n);cols++){
+            const rows=Math.ceil(n/cols);
+            const cellW=(availW-(cols-1)*g)/cols,cellH=(availH-(rows-1)*g)/rows;
+            if(cellW<=0||cellH<=0)continue;
+            const cellRatio=cellW/cellH;
+            const fitLoss=photos.reduce((sum,photo)=>{
+              const ratio=aspect(photo)/cellRatio;
+              return sum+1-Math.min(ratio,1/ratio);
+            },0)/n;
+            const emptyRatio=(cols*rows-n)/(cols*rows);
+            const score=fitLoss+emptyRatio*.18;
+            if(score<bestScore){best=cols;bestScore=score}
+          }
+          return best;
+        }
+        function renderMulti(){
+          if(!sheet)return;
+          const landscape=orientation.value==='landscape';
+          sheet.classList.toggle('landscape',landscape);
+          document.body.classList.toggle('multi-landscape',landscape);
+          const m=Number(margin.value),g=Number(gap.value),pageW=landscape?297:210,pageH=landscape?210:297;
+          const availW=pageW-2*m,availH=pageH-2*m;
+          sheet.style.setProperty('--mx',`${m/pageW*100}%`);sheet.style.setProperty('--my',`${m/pageH*100}%`);
+          sheet.style.setProperty('--gx',`${g/availW*100}%`);sheet.style.setProperty('--gy',`${g/availH*100}%`);
+          document.getElementById('multiPaperLabel').textContent=`A4 ${landscape?'أفقي':'عمودي'}`;
+          printRule.textContent=`@media print{@page{size:A4 ${landscape?'landscape':'portrait'};margin:0}}`;
+          count.textContent=photos.length?`${photos.length} صورة — موزعة لاستغلال مساحة الورقة`:'لم تُضف صور بعد';
+          printBtn.disabled=clearBtn.disabled=photos.length===0;
+          thumbs.innerHTML=photos.map((photo,index)=>`<div class="multi-thumb"><img src="${photo.url}" alt="صورة ${index+1}"><button type="button" data-remove="${index}" aria-label="حذف الصورة ${index+1}">×</button></div>`).join('');
+          if(!photos.length){sheet.innerHTML='<div class="multi-empty"><strong>ورقة A4 جاهزة</strong><span>أضف الصور لعرض الترتيب</span></div>';return}
+          const requestedCols=columns.value==='auto'?autoColumns():Number(columns.value);
+          const cols=Math.max(1,Math.min(photos.length,requestedCols));
+          const cellWidth=(100-(cols-1)*(g/availW*100))/cols;
+          const rows=[];
+          for(let offset=0;offset<photos.length;offset+=cols){
+            const group=photos.slice(offset,offset+cols);
+            const cells=group.map((photo,index)=>`<div class="multi-cell"><img src="${photo.url}" alt="صورة ${offset+index+1}"></div>`).join('');
+            rows.push(`<div class="multi-row" style="--cell-width:${cellWidth}%">${cells}</div>`);
+          }
+          sheet.innerHTML=`<div class="multi-sheet-content">${rows.join('')}</div>`;
+        }
+        fileInput.addEventListener('change',event=>{addFiles(event.target.files);fileInput.value=''});
+        thumbs.addEventListener('click',event=>{const button=event.target.closest('[data-remove]');if(!button)return;const i=Number(button.dataset.remove);URL.revokeObjectURL(photos[i].url);photos.splice(i,1);renderMulti()});
+        clearBtn.addEventListener('click',()=>{photos.forEach(photo=>URL.revokeObjectURL(photo.url));photos=[];renderMulti()});
+        [orientation,columns,margin,gap].forEach(control=>control.addEventListener('change',renderMulti));
+        printBtn.addEventListener('click',()=>window.print());
+        const drop=document.getElementById('multiDropzone');
+        drop.addEventListener('dragover',event=>{event.preventDefault();drop.style.background='#e6f5f3'});
+        drop.addEventListener('dragleave',()=>drop.style.background='');
+        drop.addEventListener('drop',event=>{event.preventDefault();drop.style.background='';addFiles(event.dataTransfer.files)});
+        window.addEventListener('beforeprint',renderMulti);
+        window.addEventListener('pagehide',()=>photos.forEach(photo=>URL.revokeObjectURL(photo.url)));
+        renderMulti();
+        setMode(new URLSearchParams(location.search).get('mode')==='multiple',false);
+      })();
+    </script>
+
+</body>
+</html>

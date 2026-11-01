@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7f1d2d">
+  <title>خدمات ألوان</title>
+  <link rel="icon" href="./alwan.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f6f7f9;--ink:#1f2937;--muted:#6b7280;--maroon:#7f1d2d;--orange:#ea580c;--border:#e9eaee;--shadow:0 4px 24px rgba(31,41,55,.08);font-family:'Cairo',sans-serif;background:var(--bg);color:var(--ink)}
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;min-height:100vh}
+    a{text-decoration:none;color:inherit}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .topbar-inner{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px 16px;max-width:1100px;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:10px;min-width:0}
+    .brand>img{width:46px;height:46px;object-fit:contain;border-radius:12px;background:#fff;border:1px solid var(--border);padding:3px;flex-shrink:0}
+    .brand-name{display:block;font-weight:800;font-size:16.5px;line-height:1.3;white-space:nowrap}
+    .brand-tag{display:block;font-size:11px;color:var(--muted);letter-spacing:1px}
+    .top-links{display:flex;order:3;flex:0 0 100%;align-items:center;gap:17px;margin:0;padding:0 2px 5px;overflow-x:auto;scrollbar-width:none}
+    .top-links::-webkit-scrollbar{display:none}
+    .top-links a{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;transition:.2s}
+    .top-links a:hover{color:var(--maroon)}
+    .topbar-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-inline-start:auto}
+    .call-chip{display:none;align-items:center;gap:6px;color:var(--maroon);font-size:12px;font-weight:800;white-space:nowrap}
+    .call-chip svg{width:16px;height:16px;fill:currentColor}
+    .customer-entry{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:7px 12px;border-radius:999px;background:linear-gradient(135deg,#7f1d2d,#b91c1c 55%,#ea580c 115%);color:#fff;font-size:12px;font-weight:800;white-space:nowrap;box-shadow:0 5px 14px rgba(127,29,45,.2)}
+    @media(min-width:640px){.call-chip{display:inline-flex}}
+    @media(min-width:900px){
+      .topbar-inner{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);flex-wrap:nowrap}
+      .brand{grid-column:1;justify-self:start}
+      .top-links{grid-column:2;order:0;flex:0 1 auto;justify-self:center;margin:0;padding:0;overflow:visible}
+      .topbar-actions{grid-column:3;justify-self:end;margin:0}
+    }
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .sec-head{text-align:center;margin:34px 0 22px}
+    .sec-head h1{font-size:clamp(22px,4vw,30px);font-weight:800;color:var(--ink)}
+    .sec-head p{font-size:14px;color:var(--muted)}
+    .sec-head .line{width:72px;height:4px;margin:10px auto 0;border-radius:99px;background:linear-gradient(90deg,#7f1d2d,#ea580c)}
+    .services-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:40px}
+    .service-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:0;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:.3s}
+    .service-card:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(31,41,55,.13)}
+    .service-visual{width:100%;aspect-ratio:3/2;display:grid;place-items:center;position:relative;overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--sc) 10%,white),#fff 70%)}
+    .service-visual img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+    .service-visual::before,.service-visual::after{content:'';position:absolute;border-radius:50%;background:color-mix(in srgb,var(--sc) 10%,transparent)}
+    .service-visual::before{width:210px;height:210px;inset:auto auto -90px -45px}.service-visual::after{width:150px;height:150px;inset:-60px -30px auto auto}
+    .service-visual span{position:relative;z-index:1;display:grid;place-items:center;width:88px;height:88px;border-radius:26px;background:#fff;box-shadow:0 12px 28px rgba(31,41,55,.12);font-size:46px}
+    .service-body{padding:14px 16px 16px;display:flex;flex:1;flex-direction:column}
+    .service-title{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .sc-icon{width:38px;height:38px;flex:0 0 38px;border-radius:12px;display:grid;place-items:center;font-size:20px;line-height:1;box-shadow:0 6px 12px rgba(31,41,55,.08)}
+    .service-card h2{font-size:16px;font-weight:800;margin:0}
+    .service-card p{font-size:13.5px;color:var(--muted);line-height:1.8;margin-bottom:14px}
+    .sc-btn{display:block;width:100%;margin-top:auto;padding:10px;border-radius:12px;text-align:center;font-weight:800;font-size:14px;color:#fff;background:var(--sc);transition:.25s}
+    .sc-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+    @media(min-width:640px){.services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(min-width:960px){.services-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    /* Navbar copied from index.html for a consistent site-wide header. */
+    .topbar{z-index:50}
+    .topbar-inner{gap:8px 12px;padding:10px 16px}
+    .brand>img{width:46px;height:46px;border:1px solid var(--border);border-radius:12px;padding:3px}
+    .brand-name{font-size:16.5px;line-height:1.3;overflow:hidden;text-overflow:ellipsis}
+    .brand-tag{font-size:11px;letter-spacing:1px}
+    .neon-logo{filter:drop-shadow(0 0 4px rgba(255,0,100,.8)) drop-shadow(0 0 9px rgba(0,200,255,.5));animation:neonPulse 2.5s ease-in-out infinite alternate}
+    .brand>img.neon-logo{background:transparent;border:0;border-radius:0;padding:0}
+    @keyframes neonPulse{from{filter:drop-shadow(0 0 3px rgba(255,0,100,.5)) drop-shadow(0 0 5px rgba(0,200,255,.3))}to{filter:drop-shadow(0 0 7px rgba(255,0,100,.9)) drop-shadow(0 0 12px rgba(0,200,255,.7))}}
+    @media(prefers-reduced-motion:reduce){.neon-logo{animation:none}}
+    .top-links{gap:20px}
+    .top-links a{font-size:14px;color:var(--muted)}
+    .call-chip{align-items:center;background:#fff;border:1.5px solid var(--border);border-radius:999px;padding:7px 14px;font-size:14px;color:var(--maroon);transition:.25s}
+    .call-chip:hover{border-color:var(--maroon);transform:translateY(-1px)}
+    .topbar-actions{gap:8px}
+    .customer-entry{min-height:42px;padding:8px 14px;font-size:13px;transition:transform .2s,box-shadow .2s}
+    .customer-entry:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(127,29,45,.27)}
+    @media(min-width:900px){.topbar-inner{flex-wrap:nowrap}.top-links{order:0;flex:0 1 auto;margin-inline-start:auto;padding:0;overflow:visible}.topbar-actions{margin-inline-start:0}}
+    @media(max-width:430px){.topbar-inner{gap:8px;padding-inline:10px}.brand{gap:7px}.brand>img{width:40px;height:40px}.brand-name{font-size:14px}.customer-entry{min-height:40px;padding:7px 10px;font-size:12px}.sec-head{margin:24px 0 16px}.service-body{padding:12px 13px 14px}.service-card h2{font-size:14px}.service-card p{font-size:12px}}
+    @media(max-width:360px){.brand-tag{display:none}.customer-entry{gap:4px;padding-inline:8px;font-size:11.5px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="./index.html#home"><img class="neon-logo" src="./alwan.png" alt="شعار ألوان للطباعة والتصميم"><span><strong class="brand-name">ألوان للطباعة والتصميم</strong><small class="brand-tag">COLORS • طباعة • تصميم • إبداع</small></span></a>
+      <nav class="top-links" aria-label="التنقل الرئيسي"><a href="./index.html#services">الخدمات</a><a href="./services-tools.html">خدمات ألوان</a><a href="./index.html#how">كيف نعمل</a><a href="./index.html#news">المستجدات</a><a href="./index.html#contact">تواصل معنا</a></nav>
+      <div class="topbar-actions">
+        <a class="call-chip" href="tel:+213655728658"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02z"/></svg><span dir="ltr">06.55.72.86.58</span></a>
+        <a class="customer-entry" href="https://toto-dz.github.io/send_alwan/" aria-label="دخول المستخدم لمتابعة الطلبات">👤 دخول المستخدم</a>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="sec-head"><h1>خدمات ألوان</h1><p>اختر الصفحة التي تريد استخدامها</p><div class="line"></div></div>
+    <section class="services-grid" aria-label="صفحات خدمات ألوان">
+      <article class="service-card" style="--sc:#7f1d2d">
+        <div class="service-visual"><span>🎓</span></div>
+        <div class="service-body"><div class="service-title"><div class="sc-icon" style="background:rgba(127,29,45,.12)">📘</div><h2>تصميم غلاف أكاديمي</h2></div><p>أنشئ غلاف بحث أو مذكرة واطبعه بمقاس A4.</p><a class="sc-btn" href="./page_%20garde.html">فتح الصفحة ←</a></div>
+      </article>
+      <article class="service-card" style="--sc:#1d4ed8">
+        <div class="service-visual"><span>🖼️</span></div>
+        <div class="service-body"><div class="service-title"><div class="sc-icon" style="background:rgba(29,78,216,.12)">📄</div><h2>تجميع عدة صور على A4</h2></div><p>رتّب صورًا مختلفة في ورقة واحدة وعاينها قبل الطباعة.</p><a class="sc-btn" href="./photos-a4.html">فتح الصفحة ←</a></div>
+      </article>
+      <article class="service-card" style="--sc:#ea580c">
+        <div class="service-visual"><span>🖨️</span></div>
+        <div class="service-body"><div class="service-title"><div class="sc-icon" style="background:rgba(234,88,12,.12)">📷</div><h2>طباعة الصور — Classer</h2></div><p>اطبع صورة واحدة أو كررها عدة مرات على ورقة A4.</p><a class="sc-btn" href="./classer.html">فتح الصفحة ←</a></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
