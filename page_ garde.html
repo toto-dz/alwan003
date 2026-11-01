@@ -1165,8 +1165,8 @@ html[dir="ltr"] .people-grid{text-align:left}
     padding:8px;border-radius:14px;overflow-x:hidden;
   }
   .academic-sheet {
-    width:100%;max-width:580px;flex-shrink:0;
-    padding: 6% 6%;font-size:clamp(9px,3.2vw,13px);
+    width:100%;max-width:580px;min-width:0;flex:0 1 auto;
+    padding: 6% 6%;font-size:clamp(7px,2.2vw,12px);
   }
   .sheet-logo-container{width:68px;height:68px;margin:7px auto}
   .sheet-logo-placeholder{width:62px;height:62px}
@@ -1197,6 +1197,27 @@ html[dir="ltr"] .people-grid{text-align:left}
   .mobile-nav-item:active{transform:scale(.97)}
   .toast{left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom));justify-content:center;text-align:center;font-size:12px}
 }
+
+/* Keep PDF export at print dimensions even when the live preview is mobile-sized. */
+.academic-sheet.pdf-capture {
+  width: 794px !important;
+  height: 1123px !important;
+  min-height: 1123px !important;
+  max-width: none !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  padding: 14mm 16mm !important;
+  font-size: 15.5pt !important;
+  line-height: 1.4 !important;
+  transform: none !important;
+}
+.academic-sheet.pdf-capture .sheet-logo-container { width: 25mm !important; height: 25mm !important; margin: 3mm auto !important; }
+.academic-sheet.pdf-capture .thesis-title-box { min-height: 22mm !important; padding: 3mm 6mm !important; }
+.academic-sheet.pdf-capture .thesis-title-text { font-size: 1.65em !important; line-height: 1.45 !important; }
+.academic-sheet.pdf-capture .academic-meta-strip { gap: 24px !important; flex-wrap: nowrap !important; margin: 3mm 0 !important; padding: 2mm 0 !important; }
+.academic-sheet.pdf-capture .thesis-section { margin: 12px 0 !important; }
+.academic-sheet.pdf-capture .people-grid { gap: 8mm !important; margin: 4mm 0 2mm !important; font-size: 1.08em !important; }
+.academic-sheet.pdf-capture .academic-year-footer { margin-top: 4mm !important; padding-top: 2mm !important; }
 
 @media (max-width: 480px){
   .top-bar{display:flex;flex-direction:column;align-items:stretch}
@@ -2203,7 +2224,9 @@ function saveCanvasAsA4Pdf(canvas, filename){
   document.body.appendChild(link);
   link.click();
   link.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1500);
+  // Some browsers begin the download after the click handler has returned.
+  // Keep the object URL alive long enough for repeated/slow downloads to start.
+  setTimeout(()=>URL.revokeObjectURL(url),60000);
 }
 
 async function triggerPdfDownload() {
@@ -2217,23 +2240,25 @@ async function triggerPdfDownload() {
   const safeName = universityName.replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, '-');
   try {
     if(document.fonts?.ready) await document.fonts.ready;
-    const previewWidth = academicSheet.clientWidth;
-    const previewHeight = academicSheet.clientHeight;
     await Promise.all([...academicSheet.querySelectorAll('img')].map(img=>img.decode ? img.decode().catch(()=>{}) : Promise.resolve()));
     await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
 
-    // Capture the visible sheet directly; off-screen clones can render as a blank page in some browsers.
+    // Capture the live sheet at print dimensions so mobile preview scaling cannot
+    // make the downloaded A4 PDF use oversized or undersized text.
+    academicSheet.classList.add('pdf-capture');
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
     const canvas = await html2canvas(academicSheet, {
       scale: 3,
       useCORS: true,
       backgroundColor: '#ffffff',
-      width: previewWidth,
-      height: previewHeight,
-      windowWidth: Math.max(document.documentElement.clientWidth, previewWidth),
-      windowHeight: Math.max(document.documentElement.clientHeight, previewHeight),
+      width: 794,
+      height: 1123,
+      windowWidth: Math.max(document.documentElement.clientWidth, 794),
+      windowHeight: Math.max(document.documentElement.clientHeight, 1123),
       scrollX: 0,
       scrollY: 0
     });
+    academicSheet.classList.remove('pdf-capture');
 
     // Normalize the captured image to the exact portrait A4 ratio before placing it.
     const a4Canvas = document.createElement('canvas');
@@ -2247,6 +2272,7 @@ async function triggerPdfDownload() {
     saveCanvasAsA4Pdf(a4Canvas,`غلاف-${safeName}.pdf`);
     showToast('تم تنزيل ملف PDF بنجاح.');
   } catch(error) {
+    academicSheet.classList.remove('pdf-capture');
     console.error('PDF generation failed:', error);
     showToast('تعذر إنشاء ملف PDF. أعد المحاولة بعد لحظات.');
   }
